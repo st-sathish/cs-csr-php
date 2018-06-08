@@ -11,7 +11,7 @@ p {margin: 0;}
 html, body{
   font-family: 'Work Sans', sans-serif;
    font-size: 100%;
-   background:#fff; 
+   background:#fff;
 }
 a {
   text-decoration: none;
@@ -1729,12 +1729,15 @@ p.grid1 {
     box-shadow: 0px 0px 2px 1px rgba(0,0,0,0.15);
 }
 .login-page {
-    padding: 6.5em 0em;
+    padding: 5.2em 0em;
 }
 .login-head {
-    background: url(../images/login.jpg)no-repeat;
+    /*background: url(../images/login.jpg)no-repeat;
     background-size: cover;
-    min-height: 150px;
+    min-height: 150px;*/
+    /*background: url("../images/Teach-Girls-End-World-Poverty.jpg")no-repeat;
+    background-size:cover;
+    min-height: 150px;*/
 }
 .login-head h1 {
     font-size:3em;
@@ -1744,7 +1747,7 @@ p.grid1 {
     font-family: 'Carrois Gothic', sans-serif;
 }
 .login-block {
-    padding: 4em 2em;
+    padding: 3em 2em;
 }
 .login-block input[type="text"], .login-block input[type="password"] {
     font-size: 0.9em;

@@ -11,7 +11,7 @@
     <!-- Custom Theme files -->
     <link href="css/style.css" rel="stylesheet" type="text/css" media="all"/>
     <!--js-->
-    <script src="js/jquery-2.1.1.min.js"></script>
+    <script src="js/jquery-3.3.1.min.js"></script>
     <!--icons-css-->
     <link href="css/font-awesome.css" rel="stylesheet">
     <!--Google Fonts-->
@@ -19,8 +19,6 @@
     <link href='//fonts.googleapis.com/css?family=Work+Sans:400,500,600' rel='stylesheet' type='text/css'>
     <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
     <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
-    <!--static chart-->
-    <script src="js/Chart.min.js"></script>
     <!--//charts-->
     <!-- geo chart -->
     <script src="//cdn.jsdelivr.net/modernizr/2.8.3/modernizr.min.js" type="text/javascript"></script>
@@ -29,13 +27,6 @@
         .toggle.ios, .toggle-on.ios, .toggle-off.ios { border-radius: 20px; }
         .toggle.ios .toggle-handle { border-radius: 20px; }
     </style>
-    <!--<script src="lib/html5shiv/html5shiv.js"></script>-->
-    <!-- Chartinator  -->
-    <script src="js/chartinator.js" ></script>   <!--geo chart-->
-
-    <!--skycons-icons-->
-    <script src="js/skycons.js"></script>
-    <!--//skycons-icons-->
 </head>
 <body>
 <div class="page-container">

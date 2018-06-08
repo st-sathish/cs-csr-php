@@ -34,17 +34,15 @@ if (isset($_POST['login'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, uMotorola web design" />
     <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css" media="all">
     <link href="css/style.css" rel="stylesheet" type="text/css" media="all"/>
-    <script src="js/jquery-2.1.1.min.js"></script>
-    <link href="css/font-awesome.css" rel="stylesheet">
     <link href='//fonts.googleapis.com/css?family=Carrois+Gothic' rel='stylesheet' type='text/css'>
     <link href='//fonts.googleapis.com/css?family=Work+Sans:400,500,600' rel='stylesheet' type='text/css'>
 </head>
 <body>
 <div class="login-page">
     <div class="login-main">
-        <div class="login-head">
+        <!-- <div class="login-head">
             <h1><?php echo TITLE;?></h1>
-        </div>
+        </div> -->
         <div class="login-block">
             <form class="login-form widget" method="post" id="userlogin" autocomplete="off">
                 <div class="w-section">
@@ -53,7 +51,6 @@ if (isset($_POST['login'])) {
                         <input  type="text" name="email" placeholder="User Name" autocomplete="on" required="">
                     </div>
                     <div class="form-group">
-
                         <input  type="password" name="password" class="lock" placeholder="Password" autocomplete="off" required="">
                     </div>
 
@@ -63,9 +60,9 @@ if (isset($_POST['login'])) {
         </div>
     </div>
 </div>
-<?php include "views/shared/footer.php";?>
-<script src="js/scripts.js"></script>
+<script src="js/jquery-3.3.1.min.js"></script>
 <script src="js/bootstrap.min.js"> </script>
+<?php include "views/shared/footer.php";?>
 <script>
     setTimeout(function() {
         $('#dangerMessage').fadeOut('fast');
