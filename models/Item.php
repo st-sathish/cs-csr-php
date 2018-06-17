@@ -12,7 +12,7 @@ class Item {
 	}
 
 	public function get_items() {
-		$sql = "SELECT * from csr_items ORDER BY i_id";
+		$sql = "SELECT * from csr_items ORDER BY modified_by DESC";
 		$stmt = $GLOBALS['conn']->prepare($sql);
 	    $stmt->execute() or die($stmt->error);
 	    $result = $stmt->get_result();
