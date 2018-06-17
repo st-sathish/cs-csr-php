@@ -29,15 +29,7 @@ error_reporting(0);
             <?php echo $_SESSION['msg'] ?>
             <!-- Page Content Holder -->
             <div id="content">
-                <nav class="navbar navbar-default">
-                    <div class="container-fluid">
-                        <div class="navbar-header">
-                            <button type="button" id="sidebarCollapse" class="btn btn-info navbar-btn">
-                                <i class="glyphicon glyphicon-align-left"></i>
-                            </button>
-                        </div>
-                    </div>
-                </nav>
+                <?php include "../shared/header.php";?>
                 <div class="sub-content">
                     <div class="col-md-12">
                          <div class="col-md-2 col-md-offset-10">
