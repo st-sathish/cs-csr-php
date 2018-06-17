@@ -36,6 +36,6 @@ include "../../constants.php";
                 </li>
             </ul>
         </div>
-        <div class="clearfix"> </div>
+        <div class="clearfix"></div>
     </div>
 </nav>
