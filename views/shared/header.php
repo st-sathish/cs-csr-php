@@ -8,34 +8,32 @@ include "../../constants.php";
                 <i class="glyphicon glyphicon-align-left"></i>
             </button>
         </div>
-    </div>
-    <div class="header-right">
-        <div class="profile_details">
-            <ul>
-                <li class="dropdown profile_details_drop">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                        <div class="profile_img">
-                            <span class="prfil-img"><img src="images/admin.png"alt=""></span>
-                            <div class="user-name">
-                                <p><?php echo $_SESSION['name']; ?></p>
-                                <span><?php echo $_SESSION['role']; ?></span>
+        <ul class="nav navbar-top-links navbar-right hidden-xs">
+            <li class="dropdown">
+                <a class="dropdown-toggle user" data-toggle="dropdown" href="#" aria-expanded="false">
+                    <span style="color:#fff"><?php echo $_SESSION['name']; ?></span>
+                    <img src="<?php echo BASE_URL ?>/images/user.jpg" alt="" data-src="<?php echo BASE_URL ?>/images/user.jpg" data-src-retina="<?php echo BASE_URL ?>/images/user.jpg" class="img-responsive img-circle user-img">
+                    <i class="fa fa-angle-down"></i>
+                </a>
+                <ul class="dropdown-menu dropdown-user animated fadeInUp">
+                    <li class="user-information">
+                        <div class="media">
+                            <a class="pull-left" href="#">
+                                <img class="media-object user-profile-image img-circle" src="<?php echo BASE_URL ?>/images/user.jpg">
+                            </a>
+                            <div class="media-body">
+                                <h4 class="media-heading"><?php echo $_SESSION['name']; ?></h4>
+                                <hr style="margin:8px auto">
                             </div>
-                            <i class="fa fa-angle-down lnr"></i>
-                            <i class="fa fa-angle-up lnr"></i>
-                            <div class="clearfix"></div>
                         </div>
-                    </a>
-                    <ul class="dropdown-menu drp-mnu">
-                        <li> <a href="<?php echo BASE_URL ?>/change_password.php">
-                            <i class="fa fa-cog"></i> Change Password</a>
-                        </li>
-                        <li> <a href="<?php echo BASE_URL ?>/logout.php">
-                            <i class="fa fa-sign-out"></i> Logout</a>
-                        </li>
-                    </ul>
-                </li>
-            </ul>
-        </div>
-        <div class="clearfix"></div>
+                    </li>
+                    <li class="divider"></li>
+                        <li><a href="<?php echo BASE_URL ?>/change_password.php"><i class="fa fa-lock fa-fw"></i>Change Password</a></li>
+                    <li class="divider"></li>
+                        <li><a href="<?php echo BASE_URL ?>/logout.php" class="text-danger"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
     </div>
 </nav>

@@ -183,18 +183,28 @@ error_reporting(0);
             $('#item-datatable').DataTable({
                   "ajax":{"url":'../../controllers/ItemsDisplayController.php',"dataSrc":""},
                   "columns": [
-                    { "data": "item_name" },
-                    { "data": "barcode" },
+                    { 
+                      "data": "item_name"
+                    },
+                    { 
+                      "data": "barcode" 
+                    },
                     { 
                       "data": "expiry_date" 
                     },
-                    { "data": "price" },
-                    { "data": "created_by"},
+                    { 
+                      "data": "price" 
+                    },
+                    { 
+                      "data": "created_by"
+                    },
                     { 
                       "data": "created_at",
                       "render": formatDate
                     },
-                    { "data": "modified_by" },
+                    { 
+                      "data": "modified_by" 
+                    },
                     { 
                       "data": "modified_at",
                       "render": formatDate

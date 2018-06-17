@@ -1,8 +1,5 @@
 <!-- Sidebar Holder -->
 <nav id="sidebar">
-    <div class="sidebar-header">
-        <h3>Logo</h3>
-    </div>
     <ul class="list-unstyled components">
         <li <?php if($page == 'dashboard') {
             echo 'class="active"';

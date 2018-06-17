@@ -24,8 +24,7 @@ a, a:hover, a:focus {
 }
 
 .navbar {
-    padding: 15px 10px;
-    background: #fff;
+    background: steelblue;
     border: none;
     border-radius: 0;
     margin-bottom: 40px;
@@ -55,17 +54,13 @@ a, a:hover, a:focus {
     left: 0;
     height: 100vh;
     z-index: 999;
-    background: #7386D5;
+    background: steelblue;
     color: #fff;
     transition: all 0.3s;
 }
 
 #sidebar.active {
     margin-left: -250px;
-}
-
-#sidebar .sidebar-header {
-    padding: 20px;
 }
 
 #sidebar ul.components {
@@ -188,4 +183,9 @@ a.article, a.article:hover {
 }
 .action {
     color: blue;
+}
+
+.navbar .nav .user-img {
+    margin-left: 5px;
+    display: inline-block;
 }
