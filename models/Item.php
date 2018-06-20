@@ -26,6 +26,22 @@ class Item {
 	    return $items;
 	}
 
+	public function get_expired_items() {
+		$today = date('Y-m-d');
+		$sql = "SELECT * from csr_items where expiry_date < '$today' ORDER BY modified_at DESC";
+		$stmt = $GLOBALS['conn']->prepare($sql);
+	    $stmt->execute() or die($stmt->error);
+	    $result = $stmt->get_result();
+	    $items = array();
+	    while ($row = $result->fetch_assoc()) {
+	        $item = $row;
+	        $category = new Category();
+	        $item['category'] = $category->get_category($row['category']);
+	        array_push($items, $item);
+	    }
+	    return $items;
+	}
+
 	public function get_item($item_id) {
 		$sql = "SELECT * from csr_items where i_id = $item_id";
 		$stmt = $GLOBALS['conn']->prepare($sql);
