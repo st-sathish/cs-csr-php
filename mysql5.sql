@@ -5,6 +5,7 @@ CREATE TABLE `csr`.`csr_user` (
   first_name VARCHAR(255) NOT NULL,
   last_name VARCHAR(255) NOT NULL,
   mobile VARCHAR(255) NULL,
+  device_token TEXT NULL DEFAULT NULL,
   PRIMARY KEY (u_id)
   )ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
