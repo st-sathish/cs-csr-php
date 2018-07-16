@@ -17,8 +17,8 @@ while($row = mysqli_fetch_array($result)) {
 		$count += 1;
 	}
 }
-if ($count > 0) {
-	$push = new Push('CapeStart CSR Alert', $count . 'Products will expire Tomorrow');
+ if ($count > 0) {
+	$push = new Push('CapeStart CSR Alert', $count . ' Products will expire Tomorrow');
 	//getting the push from push object
 	$mPushNotification = $push->getPush(); 
 

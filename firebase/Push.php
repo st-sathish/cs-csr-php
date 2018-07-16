@@ -16,8 +16,8 @@ class Push {
     //getting the push notification
     public function getPush() {
         $res = array();
-        $res['data']['title'] = $this->title;
-        $res['data']['message'] = $this->message;
+        $res['title'] = $this->title;
+        $res['message'] = $this->message;
         return $res;
     }
  
