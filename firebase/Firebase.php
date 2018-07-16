@@ -2,8 +2,10 @@
 class Firebase {
 
     public function send($registration_ids, $message) {
+        $ids = array();
+        array_push($ids, $registration_ids);
         $fields = array(
-            'registration_ids' => $registration_ids,
+            'registration_ids' => $ids,
             'data' => $message,
         );
         return $this->sendPushNotification($fields);
@@ -14,7 +16,6 @@ class Firebase {
     * and then the message is sent 
     */
     private function sendPushNotification($fields) {
-         
         //importing the constant files
         require_once 'FirebaseConfig.php';
  

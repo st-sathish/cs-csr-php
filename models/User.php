@@ -2,12 +2,12 @@
 class User {
 	
 	public function get_push_notification_token($email) {
-		$sql = "SELECT * from csr_user where username = $email";
+		$sql = "SELECT * from csr_user where username = '$email'";
 		$stmt = $GLOBALS['conn']->prepare($sql);
 	    $stmt->execute() or die($stmt->error);
 	    $result = $stmt->get_result();
 	    $row = $result->fetch_assoc();
-	    return $row['password'];
+	    return $row['device_token'];
 	}
 
 	public function modify_user_device_token($email, $device_token) {
