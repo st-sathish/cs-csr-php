@@ -1,5 +1,6 @@
 <?php
 class User {
+	
 	public function get_push_notification_token($email) {
 		$sql = "SELECT * from csr_user where username = $email";
 		$stmt = $GLOBALS['conn']->prepare($sql);
