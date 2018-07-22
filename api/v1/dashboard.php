@@ -19,8 +19,8 @@ while ($row = $result->fetch_assoc()) {
 }
 $meta_data["total_sold"] = $sold;
 $meta_data["total_expired"] = $expired;
-$meta_data["total_stocks"] = $stocks;
+$meta_data["total_stock"] = $stocks;
 $meta_data["total_profit"] = 0;
 $responses['meta_data'] = $meta_data;
-$responses['notification'] = 'Your '  . $year. ' review';
+$responses['banner_message'] = 'Your '  . $year. ' review';
 echo json_encode($responses, JSON_UNESCAPED_SLASHES);

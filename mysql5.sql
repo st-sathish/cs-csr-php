@@ -56,3 +56,9 @@ CREATE TABLE csr_items (
 
 insert into csr_user(`u_id`,`username`,`password`,`first_name`,`last_name`,`mobile`) values 
   (1, 'admin@gmail.com',MD5('admin'), 'Sathish', 'Thangathurai', '9944717544');
+
+  CREATE TABLE `csr`.`csr_notification` (
+  `n_id` INT NOT NULL AUTO_INCREMENT,
+  `item_ids` TEXT NULL DEFAULT NULL,
+  `event_date` DATE NULL DEFAULT NULL,
+  PRIMARY KEY (`n_id`));
