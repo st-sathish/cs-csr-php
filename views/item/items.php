@@ -34,7 +34,10 @@ error_reporting(0);
                 <?php include "../shared/header.php";?>
                 <div class="sub-content">
                     <div class="col-md-12">
-                         <div class="col-md-2 col-md-offset-10">
+                        <div class="col-md-2">
+                            <button type="button" class="btn btn-primary">Mark As Sold</button>
+                        </div>
+                         <div class="col-md-2 ">
                             <button type="button" class="btn btn-primary" data-toggle="modal" 
                             data-target="#myModal">Add Item</button>
                         </div>
@@ -43,6 +46,10 @@ error_reporting(0);
                         <table id="item-datatable" class="display" style="width:100%">
                             <thead>
                                 <tr>
+                                    <th>
+                                      <label>Select All</label>
+                                      <div style="text-align: center;"><input type="checkbox"></div>
+                                    </th>
                                     <th>Item Name</th>
                                     <th>Bar Code</th>
                                     <th>Expiry Date</th>
@@ -191,6 +198,16 @@ error_reporting(0);
                     url:'../../controllers/ItemsDisplayController.php'
                   },
                   "columns": [
+                    {
+                     'targets': 0,
+                     'searchable':false,
+                     'orderable':false,
+                     'className': 'dt-body-center',
+                     'render': function (data, type, full, meta){
+                         return '<input type="checkbox" name="id[]" value="' 
+                            + $('<div/>').text(data).html() + '">';
+                      }
+                    },
                     { 
                       "data": "item_name"
                     },
