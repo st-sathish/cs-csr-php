@@ -48,7 +48,7 @@ error_reporting(0);
                                 <tr>
                                     <th>
                                       <label>Select All</label>
-                                      <div style="text-align: center;"><input type="checkbox"></div>
+                                      <div style="text-align: center;"><input name="select_all" value="1" id="select-all" type="checkbox"></div>
                                     </th>
                                     <th>Item Name</th>
                                     <th>Bar Code</th>
@@ -59,6 +59,7 @@ error_reporting(0);
                                     <th>Modified By</th>
                                     <th>Modified At</th>
                                     <th>Category</th>
+                                    <th>Sold</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -187,7 +188,7 @@ error_reporting(0);
          }
 
          function initDataTable() {
-            $('#item-datatable')
+            var table = $('#item-datatable')
                 .DataTable({
                   "processing": true, 
                   "serverSide": true,
@@ -234,7 +235,15 @@ error_reporting(0);
                       "data": "modified_at",
                       "render": formatDate
                     },
-                    { "data": "category.name" },
+                    { 
+                      "data": "category.name"
+                    },
+                    { 
+                      "data": "is_sold",
+                      "render": function(data) {
+                          return data == 1 ? "Yes" : "No";
+                      }
+                    },
                     { "data": "i_id",
                         title:"Action",
                         render:function(data, type, row, meta) {
@@ -247,6 +256,12 @@ error_reporting(0);
                   scrollY: "300px",
                   scrollCollapse: false
             });
+            // Handle click on "Select all" control
+             $('#select-all').on('click', function(){
+                // Check/uncheck all checkboxes in the table
+                var rows = table.rows({ 'search': 'applied' }).nodes();
+                $('input[type="checkbox"]', rows).prop('checked', this.checked);
+             });
          }
          </script>
     </body>
