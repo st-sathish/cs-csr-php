@@ -33,6 +33,7 @@ CREATE TABLE csr_categories (
   name varchar(255) NOT NULL,
   created_by varchar(255) DEFAULT NULL,
   created_at DATETIME DEFAULT NULL,
+  is_deleted TINYINT(1) NOT NULL DEFAULT 0,
   PRIMARY KEY (c_id),
   CONSTRAINT UNQ_csr_categories UNIQUE (c_id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -49,7 +50,8 @@ CREATE TABLE csr_items (
   category bigint(20) NOT NULL,
   is_removed tinyint(1) DEFAULT 0,
   modified_by varchar(255) DEFAULT NULL,
-  modified_at DATETIME DEFAULT NULL
+  modified_at DATETIME DEFAULT NULL,
+  is_deleted TINYINT(1) NOT NULL DEFAULT 0,
   PRIMARY KEY (p_id),
   CONSTRAINT FK_csr_items_category FOREIGN KEY (category) REFERENCES csr_categories (c_id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
