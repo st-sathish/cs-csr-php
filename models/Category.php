@@ -9,7 +9,7 @@ class Category {
 	}
 
 	public function get_categories() {
-		$sql = "SELECT * from csr_categories ORDER BY c_id";
+		$sql = "SELECT * from csr_categories ORDER BY c_id DESC";
 		$stmt = $GLOBALS['conn']->prepare($sql);
 	    $stmt->execute() or die($stmt->error);
 	    $result = $stmt->get_result();

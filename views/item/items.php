@@ -180,8 +180,16 @@ error_reporting(0);
          }
 
          function initDataTable() {
-            $('#item-datatable').DataTable({
-                  "ajax":{"url":'../../controllers/ItemsDisplayController.php',"dataSrc":""},
+            $('#item-datatable')
+                .DataTable({
+                  "processing": true, 
+                  "serverSide": true,
+                  "language": {
+                      searchPlaceholder: "Search by Item Name"
+                  },
+                  "ajax": {
+                    url:'../../controllers/ItemsDisplayController.php'
+                  },
                   "columns": [
                     { 
                       "data": "item_name"
@@ -217,10 +225,10 @@ error_reporting(0);
                         }
                     }
                   ],
+                  order: [[ 9, "desc" ]],
                   searching : true,
                   scrollY: "300px",
-                  scrollCollapse: false,
-                  paging: true
+                  scrollCollapse: false
             });
          }
          </script>

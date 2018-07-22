@@ -122,10 +122,11 @@ error_reporting(0);
                         }
                     }
                   ],
+                  order: [[ 3, "desc" ]],
                   searching : false,
                   scrollY: "300px",
                   scrollCollapse: false,
-                  paging: false
+                  paging: true
             });
         }
 		 </script>

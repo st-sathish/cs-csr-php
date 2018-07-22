@@ -11,8 +11,17 @@ class Item {
     	$stmt->execute() or die($stmt->error);
 	}
 
-	public function get_items() {
-		$sql = "SELECT * from csr_items ORDER BY modified_at DESC";
+	public function get_items($params) {
+		$sql = "SELECT * from csr_items";
+		if(isset($params['search']) && $params['search'] != '') {
+			$sql .= ' WHERE item_name LIKE \'%' .$params['search'].'%\' ORDER BY modified_at DESC';
+			$count = $this->get_total_items($sql);
+		} else {
+			$count = $this->get_total_items($sql);
+			$offset = $params['offset'];
+			$limit = $params['limit'];
+			$sql .= ' ORDER BY modified_at DESC limit '.$limit.' offset '.$offset;
+		}
 		$stmt = $GLOBALS['conn']->prepare($sql);
 	    $stmt->execute() or die($stmt->error);
 	    $result = $stmt->get_result();
@@ -23,7 +32,15 @@ class Item {
 	        $item['category'] = $category->get_category($row['category']);
 	        array_push($items, $item);
 	    }
-	    return $items;
+	    $response = array();
+	    $response["total_record"] = $count;
+	    $response['data'] = $items;
+	    return $response;
+	}
+
+	public function get_total_items($sql) {
+		$result = mysqli_query($GLOBALS['conn'], $sql);
+    	return mysqli_num_rows($result);
 	}
 
 	public function get_expired_items() {
