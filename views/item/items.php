@@ -35,7 +35,7 @@ error_reporting(0);
                 <div class="sub-content">
                     <div class="col-md-12">
                         <div class="col-md-2">
-                            <button type="button" class="btn btn-primary">Mark As Sold</button>
+                            <button type="button" class="btn btn-primary" id="sold_btn">Mark As Sold</button>
                         </div>
                          <div class="col-md-2 ">
                             <button type="button" class="btn btn-primary" data-toggle="modal" 
@@ -200,13 +200,13 @@ error_reporting(0);
                   },
                   "columns": [
                     {
-                     'targets': 0,
-                     'searchable':false,
-                     'orderable':false,
-                     'className': 'dt-body-center',
-                     'render': function (data, type, full, meta){
-                         return '<input type="checkbox" name="id[]" value="' 
-                            + $('<div/>').text(data).html() + '">';
+                      "data": "i_id",
+                      'targets': 0,
+                      'searchable':false,
+                      'orderable':false,
+                      'className': 'dt-body-center',
+                      'render': function (data, type, full, meta){
+                         return '<input type="checkbox" class="row" data-id="'+data+'" name="id[]">';
                       }
                     },
                     { 
@@ -262,7 +262,22 @@ error_reporting(0);
                 var rows = table.rows({ 'search': 'applied' }).nodes();
                 $('input[type="checkbox"]', rows).prop('checked', this.checked);
              });
+              $('#sold_btn').click(function() {
+                  $('#item-datatable').find('input[type="checkbox"]:checked').each(function() {
+                      console.debug($(this).attr('data-id'));
+                  });
+              });
          }
+
+         function parseSelectedChecboxs(event) {
+             var tbl = this.table;
+             console.debug(tbl);
+             /*var selectedIds = tbl.columns().checkboxes.selected()[0];
+             console.debug(selectedIds);*/
+             /*selectedIds.forEach(function(selectedId) {
+                 alert(selectedId);
+             });*/
+        }
          </script>
     </body>
 </html>
