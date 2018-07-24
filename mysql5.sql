@@ -52,6 +52,7 @@ CREATE TABLE csr_items (
   modified_by varchar(255) DEFAULT NULL,
   modified_at DATETIME DEFAULT NULL,
   is_deleted TINYINT(1) NOT NULL DEFAULT 0,
+  is_expired TINYINT(1) NOT NULL DEFAULT 0,
   PRIMARY KEY (p_id),
   CONSTRAINT FK_csr_items_category FOREIGN KEY (category) REFERENCES csr_categories (c_id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;

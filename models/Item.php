@@ -86,4 +86,20 @@ class Item {
     		modified_by = '$user', modified_at = '$today' WHERE i_id IN ('$ids_str')";
     	mysqli_query($GLOBALS['conn'], $sql);
 	}
+
+	public function mark_as_expired($ids, $user) {
+		$ids_str = implode(',', $ids);
+		$today = date("Y-m-d h:i:s");
+		$sql = "UPDATE csr_items SET is_expired = 1, 
+    		modified_by = '$user', modified_at = '$today' WHERE i_id IN ('$ids_str')";
+    	mysqli_query($GLOBALS['conn'], $sql);
+	}
+
+	public function delete($ids, $user) {
+		$ids_str = implode(',', $ids);
+		$today = date("Y-m-d h:i:s");
+		$sql = "UPDATE csr_items SET is_deleted = 1, 
+    		modified_by = '$user', modified_at = '$today' WHERE i_id IN ('$ids_str')";
+    	mysqli_query($GLOBALS['conn'], $sql);
+	}
 }

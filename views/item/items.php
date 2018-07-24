@@ -37,6 +37,12 @@ error_reporting(0);
                         <div class="col-md-2">
                             <button type="button" class="btn btn-primary" id="sold_btn">Mark As Sold</button>
                         </div>
+                        <div class="col-md-2">
+                            <button type="button" class="btn btn-primary" id="expired_btn">Mark As Expired</button>
+                        </div>
+                        <div class="col-md-2">
+                            <button type="button" class="btn btn-primary" id="remove_btn">Remove</button>
+                        </div>
                          <div class="col-md-2 ">
                             <button type="button" class="btn btn-primary" data-toggle="modal" 
                             data-target="#myModal">Add Item</button>
@@ -247,7 +253,7 @@ error_reporting(0);
                     { "data": "i_id",
                         title:"Action",
                         render:function(data, type, row, meta) {
-                          return "<a href=javascript:void(0) onclick='editItem("+data+")'><i class='glyphicon glyphicon-edit action'></i></a>&nbsp;&nbsp;&nbsp;<a href=javascript:void(0)><i class='glyphicon glyphicon-trash action' aria-hidden='true'></i></a>"
+                          return "<a href=javascript:void(0) onclick='editItem("+data+")'><i class='glyphicon glyphicon-edit action'></i></a>"
                         }
                     }
                   ],
@@ -263,21 +269,41 @@ error_reporting(0);
                 $('input[type="checkbox"]', rows).prop('checked', this.checked);
              });
               $('#sold_btn').click(function() {
-                  var ids = [];
-                  $('#item-datatable').find('input[type="checkbox"]:checked').each(function() {
-                      ids.push($(this).attr('data-id'));
-                  });
-                  mkPostRequestMarkAsSold(ids);
+                  mkPostRequestMarkAsSold(getAllSelectedCheckbox());
+              });
+              $('#expired_btn').click(function() {
+                  mkPostRequestMarkAsExpired(getAllSelectedCheckbox());
+              });
+              $('#remove_btn').click(function() {
+                  mkPostRequestDelete(getAllSelectedCheckbox());
               });
          }
 
-         function mkPostRequestMarkAsSold(ids) {
-            if(ids.length == 0) {
-                alert("please select checkbox to mark as sold");
+         function getAllSelectedCheckbox() {
+            var ids = [];
+            $('#item-datatable').find('input[type="checkbox"]:checked').each(function() {
+                ids.push($(this).attr('data-id'));
+            });
+            return ids;
+         }
+
+        function mkPostRequestMarkAsSold(ids) {
+            mkPostRequest('mark_as_sold.php', ids, "please select checkbox to mark as sold");
+        }
+        function mkPostRequestMarkAsExpired(ids) {
+            mkPostRequest('mark_as_expired.php', ids, "please select checkbox to mark as Expired");
+        }
+        function mkPostRequestDelete(ids) {
+            mkPostRequest('delete.php', ids, "please select checkbox to Delete");
+        }
+
+        function mkPostRequest(php_file, ids, msg) {
+          if(ids.length == 0) {
+                alert(msg);
                 return;
             }
             $.ajax({
-                url: '<?php echo BASE_URL ?>' + '/api/v1/items/mark_as_sold.php',
+                url: '<?php echo BASE_URL ?>' + '/api/v1/items/'+php_file,
                 data: {
                   'username':'<?php echo $_SESSION['username']?>',
                   'ids': ids
@@ -290,6 +316,6 @@ error_reporting(0);
                 }
             });
         }
-         </script>
+        </script>
     </body>
 </html>
