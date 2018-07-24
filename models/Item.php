@@ -1,5 +1,5 @@
 <?php
-include 'Category.php';
+include_once 'Category.php';
 class Item {
 
 	public function save_item($item_name, $barcode, $price, $expiry_date, $user, $category) {
@@ -12,7 +12,7 @@ class Item {
 	}
 
 	public function get_items($params) {
-		$sql = "SELECT * from csr_items WHERE is_sold = 0 ";
+		$sql = "SELECT * from csr_items WHERE is_sold = 0 AND is_deleted=0 ";
 		if(isset($params['search']) && $params['search'] != '') {
 			$sql .= ' AND item_name LIKE \'%' .$params['search'].'%\' ORDER BY modified_at DESC';
 			$count = $this->get_total_items($sql);
@@ -38,12 +38,35 @@ class Item {
 	    return $response;
 	}
 
+	public function get_expired_items($expiry_date, $offset, $limit, $query = '') {
+		$sql = "SELECT * from csr_items WHERE expiry_date = '$expiry_date' AND is_sold = 0 AND 
+		is_deleted = 0";
+		if($query != '') {
+			$sql .= ' AND item_name LIKE \'%' .$query.'%\'';
+		}
+		$sql .= " AND limit" .$limit." offset ".$offset;
+		$stmt = $GLOBALS['conn']->prepare($sql);
+	    $stmt->execute() or die($stmt->error);
+	    $result = $stmt->get_result();
+	    $items = array();
+	    while ($row = $result->fetch_assoc()) {
+	        $item = $row;
+	        $category = new Category();
+	        $item['category'] = $category->get_category($row['category']);
+	        array_push($items, $item);
+	    }
+	    $response = array();
+	    $response["total_record"] = $count;
+	    $response['data'] = $items;
+	    return $response;
+	}
+
 	public function get_total_items($sql) {
 		$result = mysqli_query($GLOBALS['conn'], $sql);
     	return mysqli_num_rows($result);
 	}
 
-	public function get_expired_items() {
+	/*public function get_expired_items() {
 		$today = date('Y-m-d');
 		$sql = "SELECT * from csr_items where expiry_date < '$today' AND is_sold = 0 AND is_deleted = 0 ORDER BY modified_at DESC";
 		$stmt = $GLOBALS['conn']->prepare($sql);
@@ -57,7 +80,7 @@ class Item {
 	        array_push($items, $item);
 	    }
 	    return $items;
-	}
+	}*/
 
 	public function get_item($item_id) {
 		$sql = "SELECT * from csr_items where i_id = $item_id AND is_sold=0 AND is_deleted = 0";
@@ -101,5 +124,20 @@ class Item {
 		$sql = "UPDATE csr_items SET is_deleted = 1, 
     		modified_by = '$user', modified_at = '$today' WHERE i_id IN ('$ids_str')";
     	mysqli_query($GLOBALS['conn'], $sql);
+	}
+
+	public function get_expired_dates_group_by() {
+		$yesterday_date = date('m-d-Y', strtotime("-1 days"));
+		$sql = "SELECT * from csr_items where expiry_date <= '$yesterday_date' AND 
+		is_sold=0 AND is_deleted = 0 group by expiry_date order by expiry_date desc";
+		$stmt = $GLOBALS['conn']->prepare($sql);
+	    $stmt->execute() or die($stmt->error);
+	    $result = $stmt->get_result();
+	    $exp_dates = array();
+	    while ($row = $result->fetch_assoc()) {
+	        array_push($exp_dates, $row["expiry_date"]);
+	    }
+	    $row = $result->fetch_assoc();
+	    return $exp_dates;
 	}
 }

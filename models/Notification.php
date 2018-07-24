@@ -1,10 +1,9 @@
 <?php
-include 'Item.php';
-include 'Category.php';
+include_once 'Category.php';
 class Notification {
 
 	public function get_notification_items() {
-		$today = date('Y-m-d');
+		$today = date('m-d-Y');
 		$sql = "SELECT * from csr_notification where event_date='$today'";
 		$result = mysqli_query($GLOBALS['conn'], $sql);
 		$item_ids_str = $result->fetch_assoc()['item_ids'];

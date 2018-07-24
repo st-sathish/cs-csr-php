@@ -6,7 +6,7 @@ require_once '../db/db_conn.php';
 
 $today = date('m-d-Y');
 
-$sql = "SELECT * from csr_items where is_sold = 0 ORDER BY modified_at DESC";
+$sql = "SELECT * from csr_items where is_sold = 0 AND is_deleted = 0 ORDER BY modified_at DESC";
 $result = mysqli_query($conn, $sql);
 $count = 0;
 $item_ids = array();

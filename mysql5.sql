@@ -63,5 +63,5 @@ insert into csr_user(`u_id`,`username`,`password`,`first_name`,`last_name`,`mobi
   CREATE TABLE `csr`.`csr_notification` (
   `n_id` INT NOT NULL AUTO_INCREMENT,
   `item_ids` TEXT NULL DEFAULT NULL,
-  `event_date` DATE NULL DEFAULT NULL,
+  `event_date` VARCHAR(10) NULL DEFAULT NULL,
   PRIMARY KEY (`n_id`));
