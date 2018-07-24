@@ -12,9 +12,9 @@ class Item {
 	}
 
 	public function get_items($params) {
-		$sql = "SELECT * from csr_items";
+		$sql = "SELECT * from csr_items WHERE is_sold = 0 ";
 		if(isset($params['search']) && $params['search'] != '') {
-			$sql .= ' WHERE item_name LIKE \'%' .$params['search'].'%\' ORDER BY modified_at DESC';
+			$sql .= ' AND item_name LIKE \'%' .$params['search'].'%\' ORDER BY modified_at DESC';
 			$count = $this->get_total_items($sql);
 		} else {
 			$count = $this->get_total_items($sql);
@@ -45,7 +45,7 @@ class Item {
 
 	public function get_expired_items() {
 		$today = date('Y-m-d');
-		$sql = "SELECT * from csr_items where expiry_date < '$today' ORDER BY modified_at DESC";
+		$sql = "SELECT * from csr_items where expiry_date < '$today' AND is_sold = 0 AND is_deleted = 0 ORDER BY modified_at DESC";
 		$stmt = $GLOBALS['conn']->prepare($sql);
 	    $stmt->execute() or die($stmt->error);
 	    $result = $stmt->get_result();
@@ -60,7 +60,7 @@ class Item {
 	}
 
 	public function get_item($item_id) {
-		$sql = "SELECT * from csr_items where i_id = $item_id";
+		$sql = "SELECT * from csr_items where i_id = $item_id AND is_sold=0 AND is_deleted = 0";
 		$stmt = $GLOBALS['conn']->prepare($sql);
 	    $stmt->execute() or die($stmt->error);
 	    $result = $stmt->get_result();
@@ -77,5 +77,13 @@ class Item {
     		modified_by = ?, modified_at = ?, category = ? WHERE i_id = ?");
     	$stmt->bind_param("ssssssss", $item_name, $barcode, $price, $expiry_date, $user, $today, $category, $item_id);
     	$stmt->execute() or die($stmt->error);
+	}
+
+	public function mark_as_sold($ids, $user) {
+		$ids_str = implode(',', $ids);
+		$today = date("Y-m-d h:i:s");
+		$sql = "UPDATE csr_items SET is_sold = 1, 
+    		modified_by = '$user', modified_at = '$today' WHERE i_id IN ('$ids_str')";
+    	mysqli_query($GLOBALS['conn'], $sql);
 	}
 }

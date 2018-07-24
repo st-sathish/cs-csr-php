@@ -263,20 +263,32 @@ error_reporting(0);
                 $('input[type="checkbox"]', rows).prop('checked', this.checked);
              });
               $('#sold_btn').click(function() {
+                  var ids = [];
                   $('#item-datatable').find('input[type="checkbox"]:checked').each(function() {
-                      console.debug($(this).attr('data-id'));
+                      ids.push($(this).attr('data-id'));
                   });
+                  mkPostRequestMarkAsSold(ids);
               });
          }
 
-         function parseSelectedChecboxs(event) {
-             var tbl = this.table;
-             console.debug(tbl);
-             /*var selectedIds = tbl.columns().checkboxes.selected()[0];
-             console.debug(selectedIds);*/
-             /*selectedIds.forEach(function(selectedId) {
-                 alert(selectedId);
-             });*/
+         function mkPostRequestMarkAsSold(ids) {
+            if(ids.length == 0) {
+                alert("please select checkbox to mark as sold");
+                return;
+            }
+            $.ajax({
+                url: '<?php echo BASE_URL ?>' + '/api/v1/items/mark_as_sold.php',
+                data: {
+                  'username':'<?php echo $_SESSION['username']?>',
+                  'ids': ids
+                },
+                method: 'POST',
+                success: function(data) {
+                    var resp = JSON.parse(data);
+                    alert(resp.message);
+                    location.reload();
+                }
+            });
         }
          </script>
     </body>
