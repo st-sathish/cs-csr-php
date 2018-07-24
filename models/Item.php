@@ -137,7 +137,6 @@ class Item {
 	    while ($row = $result->fetch_assoc()) {
 	        array_push($exp_dates, $row["expiry_date"]);
 	    }
-	    $row = $result->fetch_assoc();
 	    return $exp_dates;
 	}
 }
