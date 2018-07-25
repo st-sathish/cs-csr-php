@@ -12,7 +12,7 @@ class Item {
 	}
 
 	public function get_items($params) {
-		$sql = "SELECT * from csr_items WHERE is_sold = 0 AND is_deleted=0 ";
+		$sql = "SELECT * from csr_items WHERE is_sold = 0 AND is_deleted=0 AND is_expired = 0 ";
 		if(isset($params['search']) && $params['search'] != '') {
 			$sql .= ' AND item_name LIKE \'%' .$params['search'].'%\' ORDER BY modified_at DESC';
 			$count = $this->get_total_items($sql);

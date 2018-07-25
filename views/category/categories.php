@@ -3,6 +3,7 @@ session_start();
 if(!isset($_SESSION['username'])) {
   header("location:/csr/index.php");
 }
+include "../../constants.php";
 $page = "categories";
 error_reporting(0);
 ?>

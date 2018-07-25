@@ -1,6 +1,3 @@
-<?php
-include "../../constants.php";
-?>
 <nav class="navbar navbar-default">
     <div class="container-fluid">
         <div class="navbar-header">
@@ -28,7 +25,7 @@ include "../../constants.php";
                         </div>
                     </li>
                     <li class="divider"></li>
-                        <li><a href="<?php echo BASE_URL ?>/change_password.php"><i class="fa fa-lock fa-fw"></i>Change Password</a></li>
+                        <li><a href="<?php echo BASE_URL ?>/views/change_password.php"><i class="fa fa-lock fa-fw"></i>Change Password</a></li>
                     <li class="divider"></li>
                         <li><a href="<?php echo BASE_URL ?>/logout.php" class="text-danger"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
                     </li>
