@@ -19,5 +19,17 @@
             <a href="<?php echo BASE_URL ?>/views/item/items.php"><i class="glyphicon glyphicon-paperclip"></i>
                 <span class="menu-text">Items</span></a>
         </li>
+        <li <?php if($page == 'expired_items') {
+            echo 'class="active"';
+            }?>>
+            <a href="<?php echo BASE_URL ?>/views/item/expired_items.php"><i class="glyphicon glyphicon-paperclip"></i>
+                <span class="menu-text">Expired Items</span></a>
+        </li>
+        <li <?php if($page == 'sold_items') {
+            echo 'class="active"';
+            }?>>
+            <a href="<?php echo BASE_URL ?>/views/item/sold_items.php"><i class="glyphicon glyphicon-paperclip"></i>
+                <span class="menu-text">Sold Items</span></a>
+        </li>
     </ul>
 </nav>
