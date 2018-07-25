@@ -3,6 +3,8 @@ session_start();
 include '../db/db_conn.php';
 include '../models/Item.php';
 include_once '../utils/ItemDateUtils.php';
+include_once '../utils/ItemDataTableUtils.php';
+
 $response = array();
 $params = json_decode(file_get_contents("php://input"));
 $requestData = $_REQUEST;
@@ -19,6 +21,7 @@ if(isset($_REQUEST['action'])) {
 	}
 } else {
 	$items = $item->get_items($params, ItemDateUtils::get_notification_dates());
+	$items['data'] = ItemDataTableUtils::formatResult($items['data']);
 }
 $response["recordsTotal"] = $items['total_record'];
 $response["recordsFiltered"] = $items['total_record'];

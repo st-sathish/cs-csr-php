@@ -189,3 +189,13 @@ a.article, a.article:hover {
     margin-left: 5px;
     display: inline-block;
 }
+
+.soon {
+    background: red !important;
+}
+.later {
+    background: green !important;
+}
+.too-later {
+    background: blue !important;
+}

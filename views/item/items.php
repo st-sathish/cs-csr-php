@@ -199,18 +199,7 @@ error_reporting(0);
                       searchPlaceholder: "Search by Item Name"
                   },
                   "ajax": {
-                    "url" :'../../controllers/ItemsDisplayController.php',
-                    "dataSrc": function (json) {
-                        var return_data = new Array();
-                        for(var i=0;i< json.length; i++){
-                          return_data.push({
-                            'title': json[i].title,
-                            'url'  : '<img src="' + json[i].url + '">',
-                            'date' : json[i].date
-                          })
-                        }
-                        return return_data;
-                    }
+                    "url" :'../../controllers/ItemsDisplayController.php'
                   },
                   "columns": [
                     {
@@ -267,6 +256,7 @@ error_reporting(0);
                   ],
                   order: [[ 9, "desc" ]],
                   searching : true,
+                  ordering: false,
                   scrollY: "300px",
                   scrollCollapse: false,
                   "createdRow": function( row, data, dataIndex){
