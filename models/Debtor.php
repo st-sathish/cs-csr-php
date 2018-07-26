@@ -51,7 +51,7 @@ class Debtor {
 		$ids_str = implode(',', $ids);
 		$today = date("Y-m-d h:i:s");
 		$sql = "UPDATE csr_debtors SET is_deleted = 1, 
-    		modified_by = '$user', modified_at = '$today' WHERE debtor_emp_id IN ('$ids_str')";
+    		modified_by = '$user', modified_at = '$today' WHERE debtor_id IN ('$ids_str')";
     	mysqli_query($GLOBALS['conn'], $sql);
 	}
 

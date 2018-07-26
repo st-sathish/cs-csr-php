@@ -276,7 +276,7 @@ error_reporting(0);
          }
 
         function mkPostRequestDelete(ids) {
-            mkPostRequest('delete_debtor.php', ids, "please select checkbox to Delete");
+            mkPostRequest('delete_debtors.php', ids, "please select checkbox to Delete");
         }
 
         function mkPostRequest(php_file, ids, msg) {
