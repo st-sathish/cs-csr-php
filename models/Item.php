@@ -15,12 +15,13 @@ class Item {
 		$expiry_date = date('m/d/Y');
 		$noti_date_str = '';
 		foreach ($notification_dates as $date) {
-			$noti_date_str .= 'expiry_date <> \''.$date.'\'' . ' OR ';
+			$noti_date_str .= '\''.$date.'\'' . ',';
 		}
-		$noti_date_str = substr($noti_date_str, 0, -3);
-		$sql = "SELECT * from csr_items WHERE is_sold = 0 
-		AND expiry_date > '$expiry_date' AND ($noti_date_str)";
-		return $this->execute_item_query($sql, $params, ' ORDER BY expiry_date ASC ');
+		$noti_date_str = rtrim($noti_date_str, ',');
+		$sql = "SELECT *, CASE WHEN expiry_date IN ($noti_date_str) 
+		THEN 1 ELSE 2 END as tmp from csr_items WHERE is_sold = 0 
+		AND expiry_date > '$expiry_date'";
+		return $this->execute_item_query($sql, $params, ' ORDER BY tmp ASC ');
 	}
 
 	public function get_expired_items($expiry_date, $offset, $limit, $query = '') {
