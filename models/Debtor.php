@@ -1,9 +1,9 @@
 <?php
 class Debtor {
 	
-	public function save_item($debtor_emp_id, $first_name, $last_name, $email, $debt_amount, $user) {
+	public function save_debtor($debtor_emp_id, $first_name, $last_name, $email, $debt_amount, $user) {
 		$today = date("Y-m-d h:i:s");
-    	$stmt = $GLOBALS['conn']->prepare("INSERT INTO csr_debtors (debtor_emp_id, first_name, last_name, email, debt_balance, created_by, created_at, modified_by, modified_at) VALUES (?,?,?,?,?,?,?,?,?)");
+    	$stmt = $GLOBALS['conn']->prepare("INSERT INTO csr_debtors (debtor_emp_id, first_name, last_name, email, debtor_balance, created_by, created_at, modified_by, modified_at) VALUES (?,?,?,?,?,?,?,?,?)");
     	$stmt->bind_param("sssssssss", $debtor_emp_id, $first_name, $last_name, $email, 
     		$debt_amount, $user, $today, $user, $today);
     	$stmt->execute() or die($stmt->error);
@@ -53,5 +53,20 @@ class Debtor {
 		$sql = "UPDATE csr_debtors SET is_deleted = 1, 
     		modified_by = '$user', modified_at = '$today' WHERE debtor_emp_id IN ('$ids_str')";
     	mysqli_query($GLOBALS['conn'], $sql);
+	}
+
+	public function update_debtor($debtId, $debtorEmpId, $firstName, $lastName, $email, $debtAmount, $user) {
+		$today = date("Y-m-d h:i:s");
+    	$stmt = $GLOBALS['conn']->prepare("UPDATE csr_debtors SET debtor_emp_id = ? , first_name =?, last_name =?, email=?, debt_balance=?, modified_by = ?, modified_at = ?, WHERE debtor_id = ?");
+    	$stmt->bind_param("ssssssss", $debtorEmpId, $firstName, $lastName, $email, $debtAmount, $user, $today, $debtId);
+    	$stmt->execute() or die($stmt->error);
+	}
+
+	public function get_debtor($debtor_id) {
+		$sql = "SELECT * from csr_debtors where debtor_id = $debtor_id";
+		$stmt = $GLOBALS['conn']->prepare($sql);
+	    $stmt->execute() or die($stmt->error);
+	    $result = $stmt->get_result();
+	    return $result->fetch_assoc();
 	}
 }

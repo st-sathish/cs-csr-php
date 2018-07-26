@@ -54,11 +54,11 @@ error_reporting(0);
                                     <th>First Name</th>
                                     <th>Last Name</th>
                                     <th>Email</th>
-                                    <th>Debt Amount</th>
                                     <th>Created By</th>
                                     <th>Created At</th>
                                     <th>Modified By</th>
                                     <th>Modified At</th>
+                                    <th>Debt Amount</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -78,12 +78,12 @@ error_reporting(0);
               </div>
               <div class="modal-body">
               <div id="msg"></div>
-              <form method="POST" onsubmit="return validateForm()" id="item_form">
-                <input type="hidden" id="debtorCode" name="debtorCode" />
+              <form method="POST" onsubmit="return validateForm()" id="debtor_form">
+                <input type="hidden" id="debtorId" name="debtorId" />
                 <div class="form-group">
-                  <label for="debtorId">Debtor Employee Id:<span class="required">*</span>
+                  <label for="debtorEmpId">Debtor Employee Id:<span class="required">*</span>
                   <span title="Employee Id"><i class="glyphicon glyphicon-question-sign help-icon"></i></span></label>
-                  <input type="text" name="debtorId" class="form-control" id="debtorId">
+                  <input type="text" name="debtorEmpId" class="form-control" id="debtorEmpId">
                 </div>
                 <div class="form-group">
                   <label for="firstName">First Name:<span class="required">*</span>
@@ -92,7 +92,7 @@ error_reporting(0);
                 </div>
                 <div class="form-group">
                   <label for="lastName">Last Name:<span class="required">*</span>
-                  <span title="First Name"><i class="glyphicon glyphicon-question-sign help-icon"></i></span></label>
+                  <span title="Last Name"><i class="glyphicon glyphicon-question-sign help-icon"></i></span></label>
                   <input type="text" name="lastName" class="form-control" id="lastName">
                 </div>
                 <div class="form-group">
@@ -101,7 +101,7 @@ error_reporting(0);
                   <input type="text" name="email" class="form-control" id="email">
                 </div>
                 <div class="form-group">
-                  <label for="debtAmount">Debt Amount:<span class="required">*</span>
+                  <label for="debtAmount">Debt Amount:
                   <span title="Debt Amount"><i class="glyphicon glyphicon-question-sign help-icon"></i></span></label>
                   <input type="text" name="debtAmount" class="form-control" id="debtAmount">
                 </div>
@@ -128,8 +128,8 @@ error_reporting(0);
              $(document).ready(function () {
                 $(".modal-title").html("Add Debtor");
                 $("#submitBtn").html("Save");
-                $("#item_form").attr("action", '<?php echo BASE_URL ?>' + '/controllers/ItemController.php?'+
-                  'action=add_item');
+                $("#debtor_form").attr("action", '<?php echo BASE_URL ?>' + '/controllers/DebtorController.php?'+
+                  'action=add_debtor');
                  $("#sidebar").mCustomScrollbar({
                     theme: "minimal"
                 });
@@ -142,35 +142,47 @@ error_reporting(0);
              });
 
             function validateForm() {
-              var itemName = $("#itemName").val();
-              if (itemName == '' || itemName == undefined) {
-                $("#msg").html("Please enter Item Name");
+              var debtEmpId = $("#debtorEmpId").val();
+              var firstName = $("#firstName").val();
+              var lastName = $("#lastName").val();
+              var email = $("#email").val();
+              if (debtEmpId == '' || debtEmpId == undefined) {
+                $("#msg").html("Please enter Debtor Employee Id");
                 $("#msg").addClass("text-danger");
                 return false;;
               }
-              var barcode = $("#barCode").val();
-              if (barcode == '' || barcode == undefined) {
-                $("#msg").html("Please enter Bar Code");
+              if (firstName == '' || firstName == undefined) {
+                $("#msg").html("Please enter First Name");
                 $("#msg").addClass("text-danger");
-                return false;;
+                return false;
+              }
+              if (lastName == '' || lastName == undefined) {
+                $("#msg").html("Please enter Last Name");
+                $("#msg").addClass("text-danger");
+                return false;
+              }
+              if (email == '' || email == undefined) {
+                $("#msg").html("Please enter Email");
+                $("#msg").addClass("text-danger");
+                return false;
               }
               return true;
            }
 
-         function editDebtors(debt_emp_code) {
-          $("#item_form").attr("action", '<?php echo BASE_URL ?>' + '/controllers/ItemController.php?action=edit_item');
-          $(".modal-title").html("Update Item");
+         function editDebtor(debt_id) {
+          $("#debtor_form").attr("action", '<?php echo BASE_URL ?>' + '/controllers/DebtorController.php?action=edit_debtor');
+          $(".modal-title").html("Update Debtor");
           $("#submitBtn").html("Update");
             $.ajax({
-                url: '<?php echo BASE_URL ?>' + '/api/v1/items/get_item.php?item_id=' + item_id,
+                url: '<?php echo BASE_URL ?>' + '/api/v1/debtors/get_debtor.php?debtor_id=' + debt_id,
                 success: function(data) {
                   var item = JSON.parse(data);
-                  $("#itemId").val(item["i_id"]);
-                  $("#itemName").val(item["item_name"]);
-                  $('#barCode').val(item["barcode"]);
-                  $('#datepicker').val(item["expiry_date"]);
-                  $('#price').val(item["price"]);
-                  $("#category select").val(item["category"]["c_ids"]);
+                  $("#debtorId").val(item["debtor_id"]);
+                  $("#debtorEmpId").val(item["debtor_emp_id"]);
+                  $('#firstName').val(item["first_name"]);
+                  $('#lastName').val(item["last_name"]);
+                  $('#email').val(item["email"]);
+                  $("#debtAmount").val(item["debtor_balance"]);
                   $("#myModal").modal('show');
                 }
             });
@@ -194,7 +206,7 @@ error_reporting(0);
                   },
                   "columns": [
                     {
-                      "data": "debtor_emp_id",
+                      "data": "debtor_id",
                       'targets': 0,
                       'searchable':false,
                       'orderable':false,
@@ -232,10 +244,10 @@ error_reporting(0);
                     { 
                       "data": "debtor_balance"
                     },
-                    { "data": "debtor_emp_id",
+                    { "data": "debtor_id",
                         title:"Action",
                         render:function(data, type, row, meta) {
-                          return "<a href=javascript:void(0) onclick='editDebtor("+data+")'><i class='glyphicon glyphicon-edit action'></i></a>&nbsp;&nbsp;<a href=javascript:void(0) onclick='intimate("+data+")'><i class='glyphicon glyphicon-email'></i></a>"
+                          return "<a href=javascript:void(0) title='Edit' onclick='editDebtor("+data+")'><i class='glyphicon glyphicon-edit action'></i></a>&nbsp;&nbsp;<a href=javascript:void(0) title='Intimate' onclick='intimate("+data+")'><i class='glyphicon glyphicon-envelope action'></i></a>"
                         }
                     }
                   ],
