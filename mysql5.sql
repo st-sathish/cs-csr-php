@@ -63,3 +63,18 @@ insert into csr_user(`u_id`,`username`,`password`,`first_name`,`last_name`,`mobi
   `item_ids` TEXT NULL DEFAULT NULL,
   `event_date` VARCHAR(10) NULL DEFAULT NULL,
   PRIMARY KEY (`n_id`));
+
+  CREATE TABLE `csr`.`csr_debtors` (
+  `debtor_id` INT NOT NULL AUTO_INCREMENT,
+  `debtor_emp_id` VARCHAR(100) NOT NULL,
+  `first_name` VARCHAR(250) NULL,
+  `last_name` VARCHAR(250) NULL,
+  `created_by` VARCHAR(250) NULL,
+  `created_at` DATE NULL,
+  `modified_by` VARCHAR(250) NULL,
+  `modified_at` DATE NULL,
+  `email` VARCHAR(500) NULL,
+  `debtor_balance` DOUBLE NULL,
+  `is_deleted` TINYINT(1) NOT NULL DEFAULT 0,
+  PRIMARY KEY (`debtor_id`),
+  UNIQUE INDEX `debtor_emp_id_UNIQUE` (`debtor_emp_id` ASC));

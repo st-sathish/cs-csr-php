@@ -1,7 +1,7 @@
 <?php
 session_start();
 if(!isset($_SESSION['username'])) {
-  header("location:/csr/index.php");
+  header("location:<?php echo BASE_URL ?>/index.php");
 }
 $page = "expired_items";
 include "../../constants.php";

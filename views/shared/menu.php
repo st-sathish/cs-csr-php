@@ -31,5 +31,11 @@
             <a href="<?php echo BASE_URL ?>/views/item/sold_items.php"><i class="glyphicon glyphicon-paperclip"></i>
                 <span class="menu-text">Sold Items</span></a>
         </li>
+        <li <?php if($page == 'debtors') {
+            echo 'class="active"';
+            }?>>
+            <a href="<?php echo BASE_URL ?>/views/debtor/debtors.php"><i class="glyphicon glyphicon-paperclip"></i>
+                <span class="menu-text">Debtors</span></a>
+        </li>
     </ul>
 </nav>
