@@ -39,30 +39,30 @@ if (isset($_POST['login'])) {
 </head>
 <body>
 <div class="login-page">
-    <div class="login-main">
-        <!-- <div class="login-head">
-            <h1><?php echo TITLE;?></h1>
-        </div> -->
-        <div class="login-block">
-            <form class="login-form widget" method="post" id="userlogin" autocomplete="off">
-                <div class="w-section">
-                    <div class="form-group">
-                        <span style="text-transform: capitalize;color:<?php echo $msg_color; ?>"><?php echo $msg; ?></span><br>
-                        <input  type="text" name="email" placeholder="User Name" autocomplete="on" required="">
-                    </div>
-                    <div class="form-group">
-                        <input  type="password" name="password" class="lock" placeholder="Password" autocomplete="off" required="">
-                    </div>
-
-                    <input type="submit" name="login" value="Login">
-            </form>
-
+</div>
+<div class="top-center">
+    <p class="banner-text">
+        <div class="col-md-12 banner-text"><h3>Poverty</h3></div>
+        <div class="col-md-12 banner-text"><h6>2018: </h6></div>
+        <div class="col-md-12 banner-text"><h6>2017: </h6></div>
+        <div class="col-md-12 banner-text"><h6>2016: </h6></div>
+    </p>
+</div>
+<div class="top-right">
+    <form class="login-form widget" method="post" id="userlogin" autocomplete="off">
+        <div class="form-group">
+            <span style="text-transform: capitalize;color:<?php echo $msg_color; ?>"><?php echo $msg; ?></span><br>
+            <input  type="text" name="email" class="form-control" placeholder="User Name" autocomplete="on" required="">
         </div>
-    </div>
+        <div class="form-group">
+            <input  type="password" name="password" class="form-control" placeholder="Password" autocomplete="off" 
+            required="">
+        </div>
+        <input type="submit" name="login" class="btn btn-primary" value="Login">
+    </form>
 </div>
 <script src="js/jquery-3.3.1.min.js"></script>
 <script src="js/bootstrap.min.js"> </script>
-<?php include "views/shared/footer.php";?>
 <script>
     setTimeout(function() {
         $('#dangerMessage').fadeOut('fast');
