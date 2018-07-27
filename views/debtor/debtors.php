@@ -35,6 +35,10 @@ error_reporting(0);
                 <div class="sub-content">
                     <div class="col-md-12">
                         <div class="col-md-2">
+                            <button type="button" class="btn btn-primary" id="debt_intimation_btn">
+                            Send Mail</button>
+                        </div>
+                        <div class="col-md-2">
                             <button type="button" class="btn btn-primary" id="remove_btn">Remove All</button>
                         </div>
                          <div class="col-md-2 ">
@@ -247,7 +251,7 @@ error_reporting(0);
                     { "data": "debtor_id",
                         title:"Action",
                         render:function(data, type, row, meta) {
-                          return "<a href=javascript:void(0) title='Edit' onclick='editDebtor("+data+")'><i class='glyphicon glyphicon-edit action'></i></a>&nbsp;&nbsp;<a href=javascript:void(0) title='Intimate' onclick='intimate("+data+")'><i class='glyphicon glyphicon-envelope action'></i></a>"
+                          return "<a href='javascript:void(0)'' title='Edit' onclick='editDebtor("+data+")'><i class='glyphicon glyphicon-edit action'></i></a>&nbsp;&nbsp;<a href='javascript:void(0)' title='Intimate' onclick='sendEmail("+data+")'><i class='glyphicon glyphicon-envelope action'></i></a>"
                         }
                     }
                   ],
@@ -265,6 +269,15 @@ error_reporting(0);
               $('#remove_btn').click(function() {
                   mkPostRequestDelete(getAllSelectedCheckbox());
               });
+              $('#debt_intimation_btn').click(function() {
+                  mkPostRequestSendEmail(getAllSelectedCheckbox());
+              })
+         }
+
+         function sendEmail(debtor_id) {
+            var ids = [];
+            ids.push(debtor_id);
+            mkPostRequestSendEmail(ids);
          }
 
          function getAllSelectedCheckbox() {
@@ -276,18 +289,13 @@ error_reporting(0);
          }
 
         function mkPostRequestDelete(ids) {
-            mkPostRequest('delete_debtors.php', ids, "please select checkbox to Delete");
-        }
-
-        function mkPostRequest(php_file, ids, msg) {
           if(ids.length == 0) {
-                alert(msg);
+                alert("please select checkbox to Delete");
                 return;
             }
             $.ajax({
-                url: '<?php echo BASE_URL ?>' + '/api/v1/debtors/'+php_file,
+                url: '<?php echo BASE_URL ?>/api/v1/debtors/delete_debtors.php',
                 data: {
-                  'username':'<?php echo $_SESSION['username']?>',
                   'ids': ids
                 },
                 method: 'POST',
@@ -295,6 +303,24 @@ error_reporting(0);
                     var resp = JSON.parse(data);
                     alert(resp.message);
                     location.reload();
+                }
+            });
+        }
+
+        function mkPostRequestSendEmail(ids) {
+            if(ids.length == 0) {
+                alert("please select checkbox to send debt email");
+                return;
+            }
+            $.ajax({
+                url: '<?php echo BASE_URL ?>/api/v1/send_debt_email.php',
+                data: {
+                  'ids': ids
+                },
+                method: 'POST',
+                success: function(data) {
+                    var resp = JSON.parse(data);
+                    alert(resp.message);
                 }
             });
         }

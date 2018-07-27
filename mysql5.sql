@@ -56,7 +56,7 @@ CREATE TABLE csr_items (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 insert into csr_user(`u_id`,`username`,`password`,`first_name`,`last_name`,`mobile`) values 
-  (1, 'admin@gmail.com',MD5('admin'), 'Sathish', 'Thangathurai', '9944717544');
+  (1, 'sathish.st@capestart.com',MD5('admin'), 'Sathish', 'Thangathurai', '9944717544');
 
   CREATE TABLE `csr`.`csr_notification` (
   `n_id` INT NOT NULL AUTO_INCREMENT,

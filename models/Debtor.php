@@ -69,4 +69,21 @@ class Debtor {
 	    $result = $stmt->get_result();
 	    return $result->fetch_assoc();
 	}
+
+	public function get_debtors_by_ids($ids) {
+		$ids_str = implode($ids, ',');
+		$sql = "SELECT * from csr_debtors where debtor_id IN($ids_str)";
+		$stmt = $GLOBALS['conn']->prepare($sql);
+	    $stmt->execute() or die($stmt->error);
+	    $result = $stmt->get_result();
+	    $debtors = array();
+	    while($row = $result->fetch_assoc()) {
+	    	$debtor['first_name'] = $row['first_name'];
+	    	$debtor['last_name'] = $row['last_name'];
+	    	$debtor['email'] = $row['email'];
+	    	$debtor['debt_amount'] = $row['debtor_balance'];
+	    	array_push($debtors, $debtor);
+	    }
+	    return $debtors;
+	}
 }

@@ -15,4 +15,14 @@ class User {
     	$stmt->bind_param("ss", $device_token, $email);
     	$stmt->execute() or die($stmt->error);
 	}
+
+	public function get_admin_email() {
+		$sql = "SELECT u.username as email FROM csr_user as u, csr_role r, csr_user_role ur where ur.role_id = r.r_id 
+		AND ur.user_id = u.u_id AND r.name = 'ROLE_ADMIN'";
+		$stmt = $GLOBALS['conn']->prepare($sql);
+	    $stmt->execute() or die($stmt->error);
+	    $result = $stmt->get_result();
+	    $row = $result->fetch_assoc();
+	    return $row['email'];
+	}
 }
