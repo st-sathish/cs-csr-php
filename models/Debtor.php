@@ -57,7 +57,7 @@ class Debtor {
 
 	public function update_debtor($debtId, $debtorEmpId, $firstName, $lastName, $email, $debtAmount, $user) {
 		$today = date("Y-m-d h:i:s");
-    	$stmt = $GLOBALS['conn']->prepare("UPDATE csr_debtors SET debtor_emp_id = ? , first_name =?, last_name =?, email=?, debt_balance=?, modified_by = ?, modified_at = ?, WHERE debtor_id = ?");
+    	$stmt = $GLOBALS['conn']->prepare("UPDATE csr_debtors SET debtor_emp_id = ? , first_name =?, last_name =?, email=?, debtor_balance=?, modified_by = ?, modified_at = ? WHERE debtor_id = ?");
     	$stmt->bind_param("ssssssss", $debtorEmpId, $firstName, $lastName, $email, $debtAmount, $user, $today, $debtId);
     	$stmt->execute() or die($stmt->error);
 	}

@@ -20,8 +20,8 @@ include '../models/Debtor.php';
 			add_debtor($debtorEmpId, $firstName, $lastName, $email, $debtAmount);
 		}
 		else if ($action == "MODIFY") {
-			$debtId = $post['debtId'];
-			update_debtor($debtId, $debtorEmpId, $firstName, $price, $expirydate, $category);
+			$debtId = $post['debtorId'];
+			update_debtor($debtId, $debtorEmpId, $firstName, $lastName, $email, $debtAmount);
 		}
 	}
 
