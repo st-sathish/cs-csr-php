@@ -1,19 +1,11 @@
 <?php
 session_start();
-if(!isset($_SESSION['username'])) {
-  header("location:/csr/index.php");
-}
 include_once "../constants.php";
-$page = "categories";
-error_reporting(0);
-if(isset($_POST['change_password_form'])) {
-    $oldPassword = $_POST['old_password'];
-    $newPassword = $_POST["new_password"];
-    $confirm_password = $_POST["confirm_password"];
-    if(sizeof($newPassword) != sizeof($confirm_password)) {
-        $_SESSION['msg'] = "New and Confirm Password are wrong";
-    }
+if(!isset($_SESSION['username'])) {
+  header("location:<?php echo BASE_URL?>/index.php");
 }
+$page = "change_password";
+error_reporting(0);
 ?>
 <!DOCTYPE html>
 <html>
@@ -35,22 +27,22 @@ if(isset($_POST['change_password_form'])) {
     <body>
         <div class="wrapper">
             <?php include "shared/menu.php";?>
-            <?php echo $_SESSION['msg'] ?>
             <!-- Page Content Holder -->
             <div id="content">
                 <?php include "shared/header.php";?>
-                <div class="sub-content">
-                    <form action="" name="change_password_form" method="POST">
-                        <div class="col-md-12">
+                <div class="col-md-4 col-md-offset-4">
+                    <div class="form-group required"><?php echo $_SESSION['msg'] ?></div>
+                    <form action="<?php echo BASE_URL ?>/controllers/UserController.php?action=change_password" name="change_password_form" method="POST">
+                        <div class="form-group">    
                             <input type="password" class="form-control" placeholder="Old Password" name="old_password"/>
                         </div>
-                        <div class="col-md-12">
+                        <div class="form-group">
                             <input type="password" class="form-control" placeholder="New Password" name="new_password"/>
                         </div>
-                        <div class="col-md-12">
+                        <div class="form-group">
                             <input type="password" class="form-control" placeholder="Confirm Password" name="confirm_password"/>
                         </div>
-                        <div class="col-md-12">
+                        <div class="form-group">
                             <input type="submit" class="btn btn-primary" name="submit" value="Change Password" />
                         </div>
                     </form>

@@ -25,4 +25,19 @@ class User {
 	    $row = $result->fetch_assoc();
 	    return $row['email'];
 	}
+
+	public function get_password($user) {
+		$sql = "SELECT password as pass FROM csr_user as u where u.username = '$user'";
+		$stmt = $GLOBALS['conn']->prepare($sql);
+	    $stmt->execute() or die($stmt->error);
+	    $result = $stmt->get_result();
+	    $row = $result->fetch_assoc();
+	    return $row['pass'];
+	}
+
+	public function change_password($new_password, $user) {
+		$sql = "UPDATE csr_user SET password = MD5('$new_password') where username = '$user'";
+		$stmt = $GLOBALS['conn']->prepare($sql);
+	    $stmt->execute() or die($stmt->error);
+	}
 }

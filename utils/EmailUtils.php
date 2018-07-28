@@ -1,5 +1,5 @@
 <?php
-require_once('../../vendors/sendgrid-php/sendgrid-php.php');
+require '../../vendors/sendgrid-php/sendgrid-php.php';
 require_once '../../env.php';
 
 class EmailUtils {
@@ -13,6 +13,8 @@ class EmailUtils {
 		try {
 			$sendgrid = new SendGrid(SENDGRID_API_KEY);
     		$response = $sendgrid->send($email);
+    		print "Hello" . $response->statusCode();
+    		die();
     		//print $response->statusCode() . "\n";
     		//print_r($response->headers());
     		//print $response->body() . "\n";
@@ -34,10 +36,11 @@ class EmailUtils {
 			try {
 				EmailUtils::send_email($from, $debtor['email'], $subject, $body);
 			} catch(Exception $e) {
+				$response["error"][] = $e->getMessage();
 				echo 'Caught exception: ',  $e->getMessage(), "\n";
 			}
 		}
-		$response["error"] = 0;
+		//$response["error"] = 0;
 		$response["message"] = "Successfully Email Sent";
 		return $response;
 	}
