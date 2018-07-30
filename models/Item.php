@@ -104,11 +104,10 @@ class Item {
 	    return $item;
 	}
 
-	public function update_item($item_id, $item_name, $barcode, $price, $expiry_date, $user, $category) {
+	public function update_item($item_id, $item_name, $barcode, $price, $s_price, $expiry_date, $user, $category) {
 		$today = date("Y-m-d h:i:s");
-    	$stmt = $GLOBALS['conn']->prepare("UPDATE csr_items SET item_name = ? , barcode =?, price =?, expiry_date =?, 
-    		modified_by = ?, modified_at = ?, category = ? WHERE i_id = ?");
-    	$stmt->bind_param("ssssssss", $item_name, $barcode, $price, $expiry_date, $user, $today, $category, $item_id);
+    	$stmt = $GLOBALS['conn']->prepare("UPDATE csr_items SET item_name = ? , barcode =?, purchase_price =?, selling_price =?, expiry_date =?, modified_by = ?, modified_at = ?, category = ? WHERE i_id = ?");
+    	$stmt->bind_param("ssssssss", $item_name, $barcode, $price, $s_price, $expiry_date, $user, $today, $category, $item_id);
     	$stmt->execute() or die($stmt->error);
 	}
 

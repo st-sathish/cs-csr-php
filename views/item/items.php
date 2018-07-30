@@ -190,7 +190,8 @@ error_reporting(0);
                   $("#itemName").val(item["item_name"]);
                   $('#barCode').val(item["barcode"]);
                   $('#datepicker').val(item["expiry_date"]);
-                  $('#price').val(item["price"]);
+                  $('#purchase_price').val(item["purchase_price"]);
+                  $('#selling_price').val(item["selling_price"]);
                   $("#category select").val(item["category"]["c_ids"]);
                   $("#myModal").modal('show');
                 }
