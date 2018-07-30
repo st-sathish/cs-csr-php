@@ -57,10 +57,6 @@ error_reporting(0);
                                     <th>Bar Code</th>
                                     <th>Expiry Date</th>
                                     <th>Price</th>
-                                    <th>Created By</th>
-                                    <th>Created At</th>
-                                    <th>Modified By</th>
-                                    <th>Modified At</th>
                                     <th>Category</th>
                                     <th>Sold</th>
                                     <th>Action</th>
@@ -108,7 +104,7 @@ error_reporting(0);
                   <input type="text" name="sell_price" class="form-control" id="sell_price">
                 </div>
                 <div class="form-group">
-                  <label for="category">Category:<span title="Choose the item category"><i class="glyphicon glyphicon-question-sign help-icon"></i></span></label>
+                  <label for="category">Category:<span class="required">*</span><span title="Choose the item category"><i class="glyphicon glyphicon-question-sign help-icon"></i></span></label>
                   <select id="category" class="form-control" name="category"></select>
                 </div>
                 <div class="col-md-offset-8">
@@ -157,6 +153,18 @@ error_reporting(0);
             var barcode = $("#barCode").val();
             if (barcode == '' || barcode == undefined) {
               $("#msg").html("Please enter Bar Code");
+              $("#msg").addClass("text-danger");
+              return false;;
+            }
+            var expirydate = $("#datepicker").val();
+            if (expirydate == '' || expirydate == undefined) {
+              $("#msg").html("Please enter expiry date");
+              $("#msg").addClass("text-danger");
+              return false;;
+            }
+            var category = $("#category").val();
+            if (category == '' || category == undefined) {
+              $("#msg").html("Please select a category");
               $("#msg").addClass("text-danger");
               return false;;
             }
@@ -229,20 +237,6 @@ error_reporting(0);
                       "data": "price" 
                     },
                     { 
-                      "data": "created_by"
-                    },
-                    { 
-                      "data": "created_at",
-                      "render": formatDate
-                    },
-                    { 
-                      "data": "modified_by" 
-                    },
-                    { 
-                      "data": "modified_at",
-                      "render": formatDate
-                    },
-                    { 
                       "data": "category.name"
                     },
                     { 
@@ -258,7 +252,7 @@ error_reporting(0);
                         }
                     }
                   ],
-                  order: [[ 9, "desc" ]],
+                  order: [[ 5, "desc" ]],
                   searching : true,
                   ordering: false,
                   scrollY: "300px",

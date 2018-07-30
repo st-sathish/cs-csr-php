@@ -32,13 +32,9 @@ class Debtor {
 		$stmt = $GLOBALS['conn']->prepare($sql);
 	    $stmt->execute() or die($stmt->error);
 	    $result = $stmt->get_result();
-	    $items = array();
-	    while ($row = $result->fetch_assoc()) {
-	        array_push($items, $row);
-	    }
 	    $response = array();
 	    $response["total_record"] = $count;
-	    $response['data'] = $items;
+	    $response['data'] = Debtor::parse_result($result);
 	    return $response;
 	}
 
@@ -76,14 +72,36 @@ class Debtor {
 		$stmt = $GLOBALS['conn']->prepare($sql);
 	    $stmt->execute() or die($stmt->error);
 	    $result = $stmt->get_result();
-	    $debtors = array();
-	    while($row = $result->fetch_assoc()) {
-	    	$debtor['first_name'] = $row['first_name'];
-	    	$debtor['last_name'] = $row['last_name'];
-	    	$debtor['email'] = $row['email'];
-	    	$debtor['debt_amount'] = $row['debtor_balance'];
+	    return Debtor::parse_simple_result($result);
+	}
+
+	public static function parse_result($result) {
+		$debtors = array();
+		while($row = $result->fetch_assoc()) {
+			$debtor['debtor_id'] = $row['debtor_id'];
+			$debtor['debtor_emp_id'] = $row['debtor_emp_id'];
+	    	Debtor::put_mandatory_columns($debtor, $row);
 	    	array_push($debtors, $debtor);
 	    }
 	    return $debtors;
+	}
+
+	public static function parse_simple_result($result) {
+		$debtors = array();
+		while($row = $result->fetch_assoc()) {
+	    	Debtor::put_mandatory_columns($debtor, $row);
+	    	array_push($debtors, $debtor);
+	    }
+	    return $debtors;
+	}
+
+	public static function put_mandatory_columns(&$debtor, $row) {
+		if($debtor == null || !isset($debtor)) {
+			$debtor = array();
+		}
+		$debtor['first_name'] = $row['first_name'];
+	    $debtor['last_name'] = $row['last_name'];
+	    $debtor['email'] = $row['email'];
+	    $debtor['debtor_balance'] = $row['debtor_balance'];
 	}
 }

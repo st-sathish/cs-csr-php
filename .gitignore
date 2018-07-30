@@ -5,3 +5,5 @@
 # Intellij
 .idea/**
 env.php
+vendor/**
+phpinfo.php

@@ -58,10 +58,6 @@ error_reporting(0);
                                     <th>First Name</th>
                                     <th>Last Name</th>
                                     <th>Email</th>
-                                    <th>Created By</th>
-                                    <th>Created At</th>
-                                    <th>Modified By</th>
-                                    <th>Modified At</th>
                                     <th>Debt Amount</th>
                                     <th>Action</th>
                                 </tr>
@@ -232,20 +228,6 @@ error_reporting(0);
                       "data": "email" 
                     },
                     { 
-                      "data": "created_by"
-                    },
-                    { 
-                      "data": "created_at",
-                      "render": formatDate
-                    },
-                    { 
-                      "data": "modified_by" 
-                    },
-                    { 
-                      "data": "modified_at",
-                      "render": formatDate
-                    },
-                    { 
                       "data": "debtor_balance"
                     },
                     { "data": "debtor_id",
@@ -255,7 +237,6 @@ error_reporting(0);
                         }
                     }
                   ],
-                  order: [[ 9, "desc" ]],
                   searching : true,
                   scrollY: "300px",
                   scrollCollapse: false

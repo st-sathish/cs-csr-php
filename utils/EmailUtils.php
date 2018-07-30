@@ -1,10 +1,10 @@
 <?php
-require '../../vendors/sendgrid-php/sendgrid-php.php';
+require '../../vendor/autoload.php';
 require_once '../../env.php';
 
 class EmailUtils {
 
-	public static function send_email($from, $to, $subject, $body) {
+	private static function send_email($from, $to, $subject, $body) {
 		$email = new \SendGrid\Mail\Mail();
 		$email->addTo($to);
 		$email->setFrom($from);
@@ -34,7 +34,8 @@ class EmailUtils {
 		foreach($debtors as $debtor) {
 			$body = "Hello ". $debtor['first_name'] ." ".$debtor['last_name'];
 			try {
-				EmailUtils::send_email($from, $debtor['email'], $subject, $body);
+				// EmailUtils::send_email($from, $debtor['email'], $subject, $body);
+				EmailUtils::curl_send_email($from, $debtor['email'], $subject, $body);
 			} catch(Exception $e) {
 				$response["error"][] = $e->getMessage();
 				echo 'Caught exception: ',  $e->getMessage(), "\n";
@@ -43,5 +44,39 @@ class EmailUtils {
 		//$response["error"] = 0;
 		$response["message"] = "Successfully Email Sent";
 		return $response;
+	}
+
+	private static function curl_send_email($from, $to, $subject, $body) {
+		$data = array();
+		$personalizations = array();
+		$personalizations["to"][]["email"] = $to;
+		if($subject == '') {
+			$subject = "CSR Debt Amount";
+		}
+		$personalizations["subject"] = $subject;
+		$data["personalizations"][] = $personalizations;
+		$data['from']["email"] = $from;
+
+		$content = array();
+		$c["type"] = "text/plain";
+		$c["value"] = $body;
+		array_push($content, $c);
+		$data["content"] = $content;
+
+		// convert into json
+		$data = json_encode($data, JSON_UNESCAPED_SLASHES);
+		$ch = curl_init();
+		curl_setopt($ch, CURLOPT_URL,"https://api.sendgrid.com/v3/mail/send");
+		curl_setopt($ch, CURLOPT_POST, 1);
+		curl_setopt($ch, CURLOPT_POSTFIELDS, $vars);  //Post Fields
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+		curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json','authorization: Bearer '. SENDGRID_API_KEY));
+		try {
+			$server_output = curl_exec ($ch);
+		} catch(Exception $e) {
+			// throw $e;
+		} finally {
+			curl_close ($ch);
+		}
 	}
 }
