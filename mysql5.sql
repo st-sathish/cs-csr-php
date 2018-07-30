@@ -42,7 +42,7 @@ CREATE TABLE csr_items (
   p_id bigint(20) NOT NULL AUTO_INCREMENT,
   item_name varchar(255) NOT NULL,
   barcode varchar(255),
-  price varchar(255),
+  purchase_price varchar(255) NULL DEFAULT 0,
   expiry_date varchar(255),
   is_sold tinyint(1) DEFAULT 0,
   created_by varchar(255) DEFAULT NULL,
@@ -51,6 +51,7 @@ CREATE TABLE csr_items (
   modified_by varchar(255) DEFAULT NULL,
   modified_at DATETIME DEFAULT NULL,
   is_deleted TINYINT(1) NOT NULL DEFAULT 0,
+  selling_price VARCHAR(255) NULL DEFAULT 0,
   PRIMARY KEY (p_id),
   CONSTRAINT FK_csr_items_category FOREIGN KEY (category) REFERENCES csr_categories (c_id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;

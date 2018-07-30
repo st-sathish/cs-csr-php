@@ -14,29 +14,30 @@ include '../models/Item.php';
 
 	function parse($action, $post) {
 		$itemName = $post['itemName'];
-		$price = $post['price'];
+		$price = $post['purchase_price'];
+		$s_price = $post['selling_price'];
 		$barcode = $post["barCode"];
 		$expirydate = $post["expiryDate"];
 		$category = $post['category'];
 		if ($action == "ADD") {
-			add_item($itemName, $barcode, $price, $expirydate, $category);
+			add_item($itemName, $barcode, $price, $s_price, $expirydate, $category);
 		}
 		else if ($action == "MODIFY") {
 			$itemId = $post['itemId'];
-			update_item($itemId, $itemName, $barcode, $price, $expirydate, $category);
+			update_item($itemId, $itemName, $barcode, $price, $s_price, $expirydate, $category);
 		}
 	}
 
-	function add_item($itemName, $barcode, $price, $expirydate, $category) {
+	function add_item($itemName, $barcode, $price, $s_price, $expirydate, $category) {
 		$ca = new Item();
-		$ca->save_item($itemName, $barcode, $price, $expirydate, $_SESSION['username'], $category);
+		$ca->save_item($itemName, $barcode, $price, $s_price, $expirydate, $_SESSION['username'], $category);
 		$_SESSION['msg'] = "Item successfully Added";
 		header("location:../views/item/items.php");
 	}
 
-	function update_item($itemId, $itemName, $barcode, $price, $expirydate, $category) {
+	function update_item($itemId, $itemName, $barcode, $price, $s_price, $expirydate, $category) {
 		$ca = new Item();
-		$ca->update_item($itemId, $itemName, $barcode, $price, $expirydate, $_SESSION['username'], $category);
+		$ca->update_item($itemId, $itemName, $barcode, $price, $s_price, $expirydate, $_SESSION['username'], $category);
 		$_SESSION['msg'] = "Item successfully Updated";
 		header("location:../views/item/items.php");
 	}

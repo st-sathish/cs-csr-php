@@ -56,7 +56,8 @@ error_reporting(0);
                                     <th>Item Name</th>
                                     <th>Bar Code</th>
                                     <th>Expiry Date</th>
-                                    <th>Price</th>
+                                    <th>Purchase Price</th>
+                                    <th>Selling Price</th>
                                     <th>Category</th>
                                     <th>Sold</th>
                                     <th>Action</th>
@@ -97,11 +98,11 @@ error_reporting(0);
                 </div>
                 <div class="form-group">
                   <label for="price">Purchase Price:<span title="Purchasd price"><i class="glyphicon glyphicon-question-sign help-icon"></i></span></label>
-                  <input type="text" name="price" class="form-control" id="price">
+                  <input type="text" name="purchase_price" class="form-control" id="purchase_price">
                 </div>
                 <div class="form-group">
-                  <label for="price">Sell Price:<span title="Selling price"><i class="glyphicon glyphicon-question-sign help-icon"></i></span></label>
-                  <input type="text" name="sell_price" class="form-control" id="sell_price">
+                  <label for="price">Selling Price:<span title="Selling price"><i class="glyphicon glyphicon-question-sign help-icon"></i></span></label>
+                  <input type="text" name="selling_price" class="form-control" id="selling_price">
                 </div>
                 <div class="form-group">
                   <label for="category">Category:<span class="required">*</span><span title="Choose the item category"><i class="glyphicon glyphicon-question-sign help-icon"></i></span></label>
@@ -234,7 +235,10 @@ error_reporting(0);
                       "data": "expiry_date" 
                     },
                     { 
-                      "data": "price" 
+                      "data": "purchase_price" 
+                    },
+                    { 
+                      "data": "selling_price" 
                     },
                     { 
                       "data": "category.name"

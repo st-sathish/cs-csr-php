@@ -49,7 +49,8 @@ error_reporting(0);
                                     <th>Item Name</th>
                                     <th>Bar Code</th>
                                     <th>Expiry Date</th>
-                                    <th>Price</th>
+                                    <th>Purchase Price</th>
+                                    <th>Selling Price</th>
                                     <th>Created By</th>
                                     <th>Created At</th>
                                     <th>Modified By</th>
@@ -122,7 +123,10 @@ error_reporting(0);
                       "data": "expiry_date" 
                     },
                     { 
-                      "data": "price" 
+                      "data": "purchase_price" 
+                    },
+                    { 
+                      "data": "selling_price" 
                     },
                     { 
                       "data": "created_by"

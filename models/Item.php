@@ -2,11 +2,11 @@
 include_once 'Category.php';
 class Item {
 
-	public function save_item($item_name, $barcode, $price, $expiry_date, $user, $category) {
+	public function save_item($item_name, $barcode, $price, $s_price, $expiry_date, $user, $category) {
 		$today = date("Y-m-d h:i:s");
-    	$stmt = $GLOBALS['conn']->prepare("INSERT INTO csr_items (item_name, barcode, price, expiry_date, 
-    		created_by, created_at, modified_by, modified_at, category) VALUES (?,?,?,?,?,?,?,?,?)");
-    	$stmt->bind_param("sssssssss", $item_name, $barcode, $price, $expiry_date, 
+    	$stmt = $GLOBALS['conn']->prepare("INSERT INTO csr_items (item_name, barcode, purchase_price, selling_price, expiry_date, 
+    		created_by, created_at, modified_by, modified_at, category) VALUES (?,?,?,?,?,?,?,?,?,?)");
+    	$stmt->bind_param("ssssssssss", $item_name, $barcode, $price, $s_price, $expiry_date, 
     		$user, $today, $user, $today, $category);
     	$stmt->execute() or die($stmt->error);
 	}
