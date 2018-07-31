@@ -24,7 +24,7 @@ else{
     define('DBHOST', 'localhost');
     define('DBNAME', 'csr');
     define('DBUSER', 'root');
-    define('DBPASS', 'root');
+    define('DBPASS', 'admin123$');
 }
 $conn = new mysqli(DBHOST, DBUSER, DBPASS, DBNAME);
 function fromsqldmy($input){

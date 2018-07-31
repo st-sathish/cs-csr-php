@@ -40,14 +40,11 @@ if (isset($_POST['login'])) {
 <body>
 <div class="login-page">
 </div>
-<div class="top-center">
+<!-- <div class="top-center">
     <p class="banner-text">
-        <div class="col-md-12 banner-text"><h3>Poverty</h3></div>
-        <div class="col-md-12 banner-text"><h6>2018: </h6></div>
-        <div class="col-md-12 banner-text"><h6>2017: </h6></div>
-        <div class="col-md-12 banner-text"><h6>2016: </h6></div>
+        <div class="col-md-12 banner-text"><h3>Surveys say </h3></div>
     </p>
-</div>
+</div> -->
 <div class="top-right">
     <form class="login-form widget" method="post" id="userlogin" autocomplete="off">
         <div class="form-group">
