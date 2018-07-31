@@ -1,3 +1,8 @@
+CREATE USER 'csr'@'localhost' IDENTIFIED BY 'csrAdmin123$';
+CREATE DATABASE csr;
+GRANT ALL PRIVILEGES ON csr.* TO 'csr'@'localhost';
+
+
 CREATE TABLE `csr`.`csr_user` (
   u_id BIGINT(20) NOT NULL AUTO_INCREMENT,
   username VARCHAR(255) NOT NULL,
