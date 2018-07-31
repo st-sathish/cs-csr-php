@@ -1,0 +1,4 @@
+RewriteEngine On
+RewriteBase /
+RewriteCond %{HTTP_HOST} ^206\.189\.133\.0$
+RewriteRule ^(.*)$ http://www.domainname.com/$1 [L,R=301]
