@@ -59,7 +59,14 @@ class EmailUtils {
 
 		$content = array();
 		$c["type"] = "text/plain";
-		$c["value"] = $body;
+		$value = "We appreciate your kindness and social responsibility. 
+		However, Your small amount will make an huge impact and possibiliy solve one child poverty in India.";
+
+		$value .= " Your debt amount is INR 20."
+
+		$value .= "please pay asap #supportCSR";
+		$c["value"] = $value;
+
 		array_push($content, $c);
 		$data["content"] = $content;
 
