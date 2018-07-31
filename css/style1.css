@@ -199,3 +199,22 @@ a.article, a.article:hover {
 .too-later {
     background: blue !important;
 }
+.circle-heading {
+        padding-left: 70px;
+}
+.circle {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  font-size: 50px;
+  color: #fff;
+  padding-top: 60px;
+  text-align: center;
+  background: #de2626;
+  border: 5px solid #9e9797;
+}
+
+.dashboard-heading {
+    text-align: center;
+    padding-bottom: 20px;
+}

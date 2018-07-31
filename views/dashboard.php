@@ -30,6 +30,39 @@ error_reporting(0);
             <div id="content">
                 <?php include "shared/header.php";?>
                 <div class="sub-content">
+                    <div class="col-md-12">
+                        <div class="col-md-12">
+                            <h3 class="dashboard-heading"></h3>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="col-md-6">
+                                <label class="circle-heading">Stocks</label>
+                                <div class="circle">
+                                    <span class="stock-total"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="circle-heading">Sold</label>
+                                <div class="circle">
+                                    <span class="sold-total"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12" style="margin-top:20px">
+                            <div class="col-md-6">
+                                <label class="circle-heading">Expired</label>
+                                <div class="circle">
+                                    <span class="expired-total"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="circle-heading">Profit</label>
+                                <div class="circle">
+                                    <span class="profit-total"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -49,7 +82,22 @@ error_reporting(0);
                     $('.collapse.in').toggleClass('in');
                     $('a[aria-expanded=true]').attr('aria-expanded', 'false');
                 });
+                initMetadata();
 		     });
+             function initMetadata() {
+                $.ajax({
+                url: '<?php echo BASE_URL ?>' + '/api/v1/dashboard.php',
+                success: function(data) {
+                  console.debug(data);
+                  data = JSON.parse(data);
+                  $(".dashboard-heading").html(data['banner_message']);
+                  $(".sold-total").text(data['meta_data']['total_sold']);
+                  $(".expired-total").text(data['meta_data']['total_expired']);
+                  $(".stock-total").text(data['meta_data']['total_stock']);
+                  $(".profit-total").text(data['meta_data']['total_profit']);
+                }
+            });
+            }
 		 </script>
 	</body>
 </html>
