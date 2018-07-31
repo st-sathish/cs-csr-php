@@ -23,8 +23,8 @@ else{
     define('IMAGES', $_SERVER['DOCUMENT_ROOT'] . '/images/');
     define('DBHOST', 'localhost');
     define('DBNAME', 'csr');
-    define('DBUSER', 'root');
-    define('DBPASS', 'admin123$');
+    define('DBUSER', 'csr');
+    define('DBPASS', 'csrAdmin123$');
 }
 $conn = new mysqli(DBHOST, DBUSER, DBPASS, DBNAME);
 function fromsqldmy($input){
