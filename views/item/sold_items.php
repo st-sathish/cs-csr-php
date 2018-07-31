@@ -51,10 +51,7 @@ error_reporting(0);
                                     <th>Expiry Date</th>
                                     <th>Purchase Price</th>
                                     <th>Selling Price</th>
-                                    <th>Created By</th>
-                                    <th>Created At</th>
-                                    <th>Modified By</th>
-                                    <th>Modified At</th>
+                                    <th>Sold</th>
                                     <th>Category</th>
                                 </tr>
                             </thead>
@@ -129,24 +126,16 @@ error_reporting(0);
                       "data": "selling_price" 
                     },
                     { 
-                      "data": "created_by"
-                    },
-                    { 
-                      "data": "created_at",
-                      "render": formatDate
-                    },
-                    { 
-                      "data": "modified_by" 
-                    },
-                    { 
-                      "data": "modified_at",
-                      "render": formatDate
+                      "data": "is_sold",
+                      "render": function(data) {
+                          return data == 1 ? "Yes" : "No";
+                      }
                     },
                     { 
                       "data": "category.name"
                     }
                   ],
-                  order: [[ 9, "desc" ]],
+                  order: [[ 1, "desc" ]],
                   searching : true,
                   scrollY: "300px",
                   scrollCollapse: false

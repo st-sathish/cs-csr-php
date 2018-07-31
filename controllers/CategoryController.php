@@ -9,6 +9,14 @@ include '../models/Category.php';
 	if ($action == 'add_category') {
 		add_category($_POST['category']);
 	}
+	if($action == 'update_category') {
+		$category_id = $_POST["categoryId"];
+		$category = $_POST["category"];
+		$ca = new Category();
+		$ca->update_category($category_id, $category, $_SESSION['username']);
+		$_SESSION['msg'] = "Successfully Category Updated";
+		header("location:../views/category/categories.php");
+	}
 
 	function add_category($category) {
 		$ca = new Category();

@@ -26,6 +26,13 @@ class Category {
 	    $result = $stmt->get_result();
 	    return $result->fetch_assoc();
 	}
+
+	public function update_category($category_id, $category, $user) {
+		$today = date("Y-m-d h:i:s");
+    	$stmt = $GLOBALS['conn']->prepare("UPDATE csr_categories SET name=? WHERE c_id = ?");
+    	$stmt->bind_param("ss", $category, $category_id);
+    	$stmt->execute() or die($stmt->error);
+	}
 }
 
 ?>

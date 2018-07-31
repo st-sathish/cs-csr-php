@@ -1,3 +1,3 @@
 <?php
 
-define("BASE_URL",'http://cs-csr.com');
+define("BASE_URL",'http://localhost/csr');

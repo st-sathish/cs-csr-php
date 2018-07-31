@@ -64,7 +64,8 @@ error_reporting(0);
               <div class="modal-body">
               <div id="msg"></div>
               <form method="POST" action="../../controllers/CategoryController.php?action=add_category" 
-              onsubmit="return validateForm()">
+              onsubmit="return validateForm()" id="item_form">
+              <input type="hidden" id="categoryId" name="categoryId" />
                 <div class="form-group">
                   <label for="category">Category Name:<span class="required">*</span></label>
                   <input type="text" name="category" class="form-control" id="category">
@@ -119,7 +120,7 @@ error_reporting(0);
                     { "data": "c_id",
                         title:"Action",
                         render:function(data, type, row, meta) {
-                          return "<a href=javascript:void(0)><i class='glyphicon glyphicon-edit action'></i></a>"
+                          return "<a href=javascript:void(0) onclick='editCategory("+data+")'><i class='glyphicon glyphicon-edit action'></i></a>"
                         }
                     }
                   ],
@@ -130,6 +131,19 @@ error_reporting(0);
                   paging: true
             });
         }
+        function editCategory(item_id) {
+          $("#item_form").attr("action", '<?php echo BASE_URL ?>' + '/controllers/CategoryController.php?action=update_category');
+          $("#submitBtn").html("Update");
+            $.ajax({
+                url: '<?php echo BASE_URL ?>' + '/api/v1/category/get_category.php?item_id=' + item_id,
+                success: function(data) {
+                  var item = JSON.parse(data);
+                  $("#categoryId").val(item["c_id"]);
+                  $("#category").val(item["name"]);
+                  $("#myModal").modal('show');
+                }
+            });
+         }
 		 </script>
 	</body>
 </html>
