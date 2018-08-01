@@ -32,10 +32,12 @@ class EmailUtils {
 		}
 		$subject = "CSR Debt";
 		foreach($debtors as $debtor) {
-			$body = "Hello ". $debtor['first_name'] ." ".$debtor['last_name'];
+			$name = $debtor['first_name'] ." ".$debtor['last_name'];
+			$debt_amount = $debtor["debtor_balance"];
+			$body = "";
 			try {
 				// EmailUtils::send_email($from, $debtor['email'], $subject, $body);
-				EmailUtils::curl_send_email($from, $debtor['email'], $subject, $body);
+				EmailUtils::curl_send_email($from, $debtor['email'], $subject, $body, $name, $debt_amount);
 			} catch(Exception $e) {
 				$response["error"][] = $e->getMessage();
 				echo 'Caught exception: ',  $e->getMessage(), "\n";
@@ -46,25 +48,20 @@ class EmailUtils {
 		return $response;
 	}
 
-	private static function curl_send_email($from, $to, $subject, $body) {
+	private static function curl_send_email($from, $to, $subject, $body, $name, $debt) {
 		$data = array();
 		$personalizations = array();
 		$personalizations["to"][]["email"] = $to;
 		if($subject == '') {
-			$subject = "CSR Debt Amount";
+			$subject = "CSR Debt";
 		}
 		$personalizations["subject"] = $subject;
 		$data["personalizations"][] = $personalizations;
 		$data['from']["email"] = $from;
 
 		$content = array();
-		$c["type"] = "text/plain";
-		$value = "We appreciate your kindness and social responsibility. 
-		However, Your small amount will make an huge impact and possibiliy solve one child poverty in India.";
-
-		$value .= " Your debt amount is INR 20."
-
-		$value .= "please pay asap #supportCSR";
+		$c["type"] = "text/html";
+		$value = "<p>Hi " .$name. "</br></br></p><p>Thanks for supporting CSR!</p></br></br><p>This is an computer generated email to intimate you that you have an pending payment balance of <strong>Rs." .$debt. " </strong>to be paid to CSR. We will really appreciate you if you could close that at the earliest.</p></br></br><p>If you do not have any debts and still you are receiving this email, then please contact Abey George.</p></br></br></br></br>Thanks!";
 		$c["value"] = $value;
 
 		array_push($content, $c);
