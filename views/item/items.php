@@ -63,6 +63,19 @@ error_reporting(0);
                                     <th>Action</th>
                                 </tr>
                             </thead>
+                            <tfoot>
+                                <tr>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th>Total</th>
+                                    <th>Total</th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                </tr>
+                            </tfoot>
                         </table>
                     </div>
                 </div>
@@ -266,6 +279,59 @@ error_reporting(0);
                       if(data[3] ==  `someVal`){
                           $(row).addClass('redClass');
                       }
+                  },
+                  footerCallback: function ( row, data, start, end, display ) {
+                      var api = this.api(), data;
+           
+                      // Remove the formatting to get integer data for summation
+                      var intVal = function ( i ) {
+                          return typeof i === 'string' ?
+                              i.replace(/[\$,]/g, '')*1 :
+                              typeof i === 'number' ?
+                                  i : 0;
+                      };
+           
+                      // Total over all pages
+                      total_col4 = api
+                          .column( 4 )
+                          .data()
+                          .reduce( function (a, b) {
+                              return intVal(a) + intVal(b);
+                          }, 0 );
+           
+                      // Total over this page
+                      pageTotal_col4 = api
+                          .column( 4, { page: 'current'} )
+                          .data()
+                          .reduce( function (a, b) {
+                              return intVal(a) + intVal(b);
+                          }, 0 );
+
+                      // Total over all pages
+                      total_col5 = api
+                          .column( 5 )
+                          .data()
+                          .reduce( function (a, b) {
+                              return intVal(a) + intVal(b);
+                          }, 0 );
+           
+                      // Total over this page
+                      pageTotal_col5 = api
+                          .column( 5, { page: 'current'} )
+                          .data()
+                          .reduce( function (a, b) {
+                              return intVal(a) + intVal(b);
+                          }, 0 );
+           
+                      // Update footer
+                      $( api.column( 4 ).footer() ).html(
+                          pageTotal_col4 +' ('+ total_col4 +' total)'
+                      );
+
+                      // Update footer
+                      $( api.column( 5 ).footer() ).html(
+                          pageTotal_col5 +' ('+ total_col5 +' total)'
+                      );
                   }
             });
             // Handle click on "Select all" control
