@@ -72,7 +72,7 @@ class EmailUtils {
 		$ch = curl_init();
 		curl_setopt($ch, CURLOPT_URL,"https://api.sendgrid.com/v3/mail/send");
 		curl_setopt($ch, CURLOPT_POST, 1);
-		curl_setopt($ch, CURLOPT_POSTFIELDS, $vars);  //Post Fields
+		curl_setopt($ch, CURLOPT_POSTFIELDS, $data);  //Post Fields
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 		curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json','authorization: Bearer '. SENDGRID_API_KEY));
 		try {
