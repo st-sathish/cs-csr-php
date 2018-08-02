@@ -13,16 +13,14 @@ $s_price = 0;
 $p_price = 0;
 while ($row = $result->fetch_assoc()) {
 	if($row['is_sold'] == 1) {
+		$s_price += floatval($row["selling_price"]);
+		$p_price += floatval($row["purchase_price"]);
 		$sold += 1;
 	}
 	if($row['is_sold'] == 0 && $row['expiry_date'] < $today) {
 		$expired += 1;
 	} else if($row['is_sold'] == 0 && $row['expiry_date'] > $today){
 		$stocks += 1;
-	}
-	if($row['is_sold'] == 1 && $row['expiry_date'] > $today) {
-		$s_price += floatval($row["selling_price"]);
-		$p_price += floatval($row["purchase_price"]);
 	}
 }
 $profit = $s_price - $p_price;
