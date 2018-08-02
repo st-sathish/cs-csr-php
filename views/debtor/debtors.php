@@ -91,7 +91,7 @@ error_reporting(0);
                   <input type="text" name="firstName" class="form-control" id="firstName">
                 </div>
                 <div class="form-group">
-                  <label for="lastName">Last Name:<span class="required">*</span>
+                  <label for="lastName">Last Name:
                   <span title="Last Name"><i class="glyphicon glyphicon-question-sign help-icon"></i></span></label>
                   <input type="text" name="lastName" class="form-control" id="lastName">
                 </div>
@@ -101,8 +101,7 @@ error_reporting(0);
                   <input type="text" name="email" class="form-control" id="email">
                 </div>
                 <div class="form-group">
-                  <label for="debtAmount">Debt Amount:
-                  <span title="Debt Amount"><i class="glyphicon glyphicon-question-sign help-icon"></i></span></label>
+                  <label for="debtAmount">Debt Amount:<span class="required">*</span></label>
                   <input type="text" name="debtAmount" class="form-control" id="debtAmount">
                 </div>
                 <div class="col-md-offset-8">
@@ -144,7 +143,7 @@ error_reporting(0);
             function validateForm() {
               var debtEmpId = $("#debtorEmpId").val();
               var firstName = $("#firstName").val();
-              var lastName = $("#lastName").val();
+              var debtAmount = $("#debtAmount").val();
               var email = $("#email").val();
               if (debtEmpId == '' || debtEmpId == undefined) {
                 $("#msg").html("Please enter Debtor Employee Id");
@@ -156,13 +155,13 @@ error_reporting(0);
                 $("#msg").addClass("text-danger");
                 return false;
               }
-              if (lastName == '' || lastName == undefined) {
-                $("#msg").html("Please enter Last Name");
+              if (email == '' || email == undefined) {
+                $("#msg").html("Please enter Email");
                 $("#msg").addClass("text-danger");
                 return false;
               }
-              if (email == '' || email == undefined) {
-                $("#msg").html("Please enter Email");
+              if (debtAmount == '' || debtAmount == undefined) {
+                $("#msg").html("Please enter Debt Amount");
                 $("#msg").addClass("text-danger");
                 return false;
               }
