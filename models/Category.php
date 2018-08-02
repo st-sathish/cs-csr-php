@@ -13,8 +13,9 @@ class Category {
 		$stmt = $GLOBALS['conn']->prepare($sql);
 	    $stmt->execute() or die($stmt->error);
 	    $result = $stmt->get_result();
+	    $categories = array();
 	    while ($row = $result->fetch_assoc()) {
-	        $categories[] = $row;
+	        array_push($categories, $row);
 	    }
 	    return $categories;
 	}

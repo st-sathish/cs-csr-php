@@ -62,7 +62,9 @@ CREATE TABLE csr_items (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 insert into csr_user(`u_id`,`username`,`password`,`first_name`,`last_name`,`mobile`) values 
-  (1, 'sathish.st@capestart.com',MD5('admin123$'), 'Sathish', 'Thangathurai', '9944717544');
+  (1, 'abey.george@capestart.com',MD5('admin123$'), 'Abey', 'George', '9894744520');
+
+insert into csr_user_role(`user_id`,`role_id`) values (1,1);
 
   CREATE TABLE `csr`.`csr_notification` (
   `n_id` INT NOT NULL AUTO_INCREMENT,
