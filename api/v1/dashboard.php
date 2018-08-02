@@ -20,8 +20,10 @@ while ($row = $result->fetch_assoc()) {
 	} else if($row['is_sold'] == 0 && $row['expiry_date'] > $today){
 		$stocks += 1;
 	}
-	$s_price += floatval($row["selling_price"]);
-	$p_price += floatval($row["purchase_price"]);
+	if($row['is_sold'] == 1 && $row['expiry_date'] > $today) {
+		$s_price += floatval($row["selling_price"]);
+		$p_price += floatval($row["purchase_price"]);
+	}
 }
 $profit = $s_price - $p_price;
 $meta_data["total_sold"] = $sold;
