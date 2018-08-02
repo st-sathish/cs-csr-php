@@ -28,11 +28,11 @@ error_reporting(0);
     <body>
         <div class="wrapper">
             <?php include "../shared/menu.php";?>
-            <?php echo $_SESSION['msg'] ?>
             <!-- Page Content Holder -->
             <div id="content">
                 <?php include "../shared/header.php";?>
                 <div class="sub-content">
+                    <div class="col-md-12 required message"><?php echo $_SESSION['msg'] ?></div>
                     <div class="col-md-12">
                         <div class="col-md-2">
                             <button type="button" class="btn btn-primary" id="debt_intimation_btn">
@@ -138,6 +138,11 @@ error_reporting(0);
                     $('a[aria-expanded=true]').attr('aria-expanded', 'false');
                 });
                 initDataTable();
+                setTimeout(function(){
+                      if($('.message').length > 0) {
+                        $('.message').html('');
+                      }
+                }, 3000)
              });
 
             function validateForm() {
