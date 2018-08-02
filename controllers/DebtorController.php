@@ -27,6 +27,12 @@ include '../models/Debtor.php';
 
 	function add_debtor($debtorEmpId, $firstName, $lastName, $email, $debtAmount) {
 		$dt = new Debtor();
+		$isExist = $dt->is_user_exist($debtorEmpId);
+		if($isExist) {
+			$_SESSION['msg'] = "Debtor already exist";
+			header("location:../views/debtor/debtors.php");
+			return;
+		}
 		$dt->save_debtor($debtorEmpId, $firstName, $lastName, $email, $debtAmount, $_SESSION['username']);
 		$_SESSION['msg'] = "Debtor successfully Added";
 		header("location:../views/debtor/debtors.php");

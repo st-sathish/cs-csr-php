@@ -9,6 +9,15 @@ class Debtor {
     	$stmt->execute() or die($stmt->error);
 	}
 
+	public function is_user_exist($debtor_emp_id) {
+		$sql = "SELECT * from csr_debtors where debtor_emp_id = '$debtor_emp_id'";
+		$stmt = $GLOBALS['conn']->prepare($sql);
+	    $stmt->execute() or die($stmt->error);
+	    $result = $stmt->get_result();
+	    $count = mysqli_num_rows($result);
+	    return ($count > 0) ? true : false;
+	}
+
 	public function get_debtors($params) {
 		$sql = "SELECT * FROM csr_debtors WHERE ";
 		return $this->execute_query($sql, $params, ' ORDER BY modified_at DESC ');
