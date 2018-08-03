@@ -32,7 +32,11 @@ class EmailUtils {
 		}
 		$subject = "CSR Debt";
 		foreach($debtors as $debtor) {
-			$name = $debtor['first_name'] ." ".$debtor['last_name'];
+			$last_name = "";
+			if(isset($debtor['last_name'])) {
+				$last_name = $debtor['last_name'];
+			}
+			$name = $debtor['first_name'] ." ".$last_name;
 			$debt_amount = $debtor["debtor_balance"];
 			$body = "";
 			try {
