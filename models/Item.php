@@ -43,7 +43,10 @@ class Item {
 	public function execute_item_query($sql, $params, $order_by = '') {
 		$offset = $params["offset"];
 		$limit = $params["limit"];
-		$query = $params['search'];
+		$query = '';
+		if(isset($params['search'])) {
+			$query = $params['search'];
+		}
 		$sql .= ' AND is_deleted = 0';
 		if(isset($params['search']) && $params['search'] != '') {
 			$sql .= ' AND item_name LIKE \'%' .$query.'%\'';
