@@ -6,7 +6,7 @@ date_default_timezone_set("Asia/Kolkata");
 
 define('TITLE', 'CSR');
 
-if($_SERVER['HTTP_HOST'] == "localhost"){
+if($_SERVER['HTTP_HOST'] == "localhost" || $_SERVER['HTTP_HOST'] == "192.168.43.134"){
     define('SITEURL', 'https://' . $_SERVER['HTTP_HOST'].'/csr/');
     define('SITEPATH', $_SERVER['DOCUMENT_ROOT']);
     define('CSS', $_SERVER['DOCUMENT_ROOT'] . '/css/');
