@@ -2,7 +2,7 @@
 include '../../../db/db_conn.php';
 include '../../../models/Item.php';
 include_once '../../../utils/ItemDateUtils.php';
-$params = json_decode(file_get_contents("php://input"));
+$params = json_decode(file_get_contents("php://input"), true);
 $item = new Item();
 if(!isset($params['limit'])) {
 	$params['limit'] = 10;
